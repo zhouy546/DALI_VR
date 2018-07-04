@@ -8,7 +8,7 @@ public class ToggleMouseCtr : MonoBehaviour {
 
     private void Start()
     {
-        CameraMovement_hemisphere.EnbaleMouseCtr= toggle.isOn = false;
+        toggle.isOn = CameraMovement_hemisphere.EnbaleMouseCtr;
     }
 
 

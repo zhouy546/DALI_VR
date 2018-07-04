@@ -20,6 +20,8 @@ public class ReadJson : MonoBehaviour {
     string ip;
 
     int port;
+
+    string enableMouse;
     // Use this for initialization
     void Start () {
 
@@ -59,11 +61,26 @@ public class ReadJson : MonoBehaviour {
 
              port =int.Parse(itemDate["config"]["Port"].ToString());//get port;
 
+             enableMouse = itemDate["config"]["EnbaleMouse"].ToString();
         SetupData();
     }
 
     void SetupData() {
         GetUDPMessage.m_ReceivePort = port;
+       CameraMovement_hemisphere.EnbaleMouseCtr= boolConvert(enableMouse);
+
+    }
+
+    bool boolConvert(string s) {
+        if (s == "0")
+        {
+            return false;
+        }
+        else if (s == "1") {
+            return true;
+        }
+
+        return false;
     }
 
 }

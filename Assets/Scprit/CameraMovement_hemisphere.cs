@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMovement_hemisphere : MonoBehaviour {
-    public static bool EnbaleMouseCtr = true;
+    public static bool EnbaleMouseCtr = false;
 
     Camera mCamera;
 

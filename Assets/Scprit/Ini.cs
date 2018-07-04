@@ -21,7 +21,7 @@ public class Ini : MonoBehaviour {
 		
 	}
 
-    IEnumerator initialization() {
+   public IEnumerator initialization() {
         readJson = FindObjectOfType<ReadJson>();
 
         cameraMovement_Hemisphere = FindObjectOfType<CameraMovement_hemisphere>();
