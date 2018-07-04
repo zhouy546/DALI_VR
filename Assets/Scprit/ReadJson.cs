@@ -19,7 +19,7 @@ public class ReadJson : MonoBehaviour {
 
     string ip, port, enableMouse, SplitChar,Xrot,Yrot,Zrot;
 
-    public static Vector3 CamRotation;
+
 
 
 
