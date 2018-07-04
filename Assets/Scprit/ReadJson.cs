@@ -19,7 +19,7 @@ public class ReadJson : MonoBehaviour {
 
     string ip;
 
-    string port;
+    int port;
     // Use this for initialization
     void Start () {
 
@@ -57,9 +57,13 @@ public class ReadJson : MonoBehaviour {
 
              ip = itemDate["config"]["IP"].ToString();//get ip;
 
-             port = itemDate["config"]["Port"].ToString();//get port;
+             port =int.Parse(itemDate["config"]["Port"].ToString());//get port;
 
-        Debug.Log(ip);
+        SetupData();
+    }
+
+    void SetupData() {
+        GetUDPMessage.m_ReceivePort = port;
     }
 
 }

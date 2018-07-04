@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMovement_hemisphere : MonoBehaviour {
+    public static bool EnbaleMouseCtr = true;
+
     Camera mCamera;
 
     Transform CamTrans;
@@ -33,7 +35,7 @@ public class CameraMovement_hemisphere : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (mCamera != null && CamTrans != null) {
+        if (mCamera != null && CamTrans != null&& EnbaleMouseCtr) {
 
             float XAxis = Input.GetAxis("Mouse X");
 

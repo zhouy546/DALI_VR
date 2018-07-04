@@ -663,7 +663,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 65d7bed2-cbb8-4e26-9594-54263820447b
   projectName: DALI_VR
   organizationId: yunqi-zhou
