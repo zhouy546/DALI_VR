@@ -17,11 +17,12 @@ public class ReadJson : MonoBehaviour {
 
     private string jsonString;
 
-    string ip;
+    string ip, port, enableMouse, SplitChar,Xrot,Yrot,Zrot;
 
-    int port;
+    public static Vector3 CamRotation;
 
-    string enableMouse;
+
+
     // Use this for initialization
     void Start () {
 
@@ -57,17 +58,39 @@ public class ReadJson : MonoBehaviour {
        itemDate = JsonMapper.ToObject(jsonString.ToString());
 
 
-             ip = itemDate["config"]["IP"].ToString();//get ip;
+        ip = itemDate["config"]["IP"].ToString();//get ip;
 
-             port =int.Parse(itemDate["config"]["Port"].ToString());//get port;
+        port =itemDate["config"]["Port"].ToString();//get port;
 
-             enableMouse = itemDate["config"]["EnbaleMouse"].ToString();
+        enableMouse = itemDate["config"]["EnbaleMouse"].ToString();//get 是否开启鼠标控制
+
+        SplitChar = itemDate["config"]["SplitChar"].ToString(); //UDP分隔符
+
+
+       // ----------------- 获取初始摄像机角度---------------------//
+        List<string> angles = new List<string>();
+
+        for (int i = 0; i < itemDate["config"]["DefaultCameraRot"].Count; i++)
+        {
+
+            angles.Add(itemDate["config"]["DefaultCameraRot"][i].ToString());
+        }
+
+        Xrot = angles[0];
+
+        Yrot = angles[1];
+
+        Zrot = angles[2];
+
+        CameraMovement_hemisphere.DefaultCameraRot = new Vector3(int.Parse(Xrot), int.Parse(Yrot), int.Parse(Zrot));
+        //--------------------------------------------------------------//
         SetupData();
     }
 
     void SetupData() {
-        GetUDPMessage.m_ReceivePort = port;
-       CameraMovement_hemisphere.EnbaleMouseCtr= boolConvert(enableMouse);
+        GetUDPMessage.m_ReceivePort = int.Parse(port);
+        CameraMovement_hemisphere.EnbaleMouseCtr= boolConvert(enableMouse);
+        DealWithUDPMessage.sliceStr = charConvert(SplitChar);
 
     }
 
@@ -83,4 +106,9 @@ public class ReadJson : MonoBehaviour {
         return false;
     }
 
+    char[] charConvert(string s) {
+        char[] mchar = s.ToCharArray();
+
+        return mchar;
+    }
 }

@@ -14,10 +14,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class DealWithUDPMessage : MonoBehaviour {
   
     private string dataTest;
+    public static char[] sliceStr;
+    private Vector3 CamRotation;
     /// <summary>
     /// 消息处理
     /// </summary>
@@ -26,7 +29,21 @@ public class DealWithUDPMessage : MonoBehaviour {
     {
         if (_data != "") {
             dataTest = _data;
-            Debug.Log(dataTest);
+
+            string[] strs = dataTest.Split(sliceStr);
+            for (int i = 0; i < strs.Length; i++)
+            {
+                if (i == 0)
+                    CamRotation.x =int.Parse( strs[i]);
+
+                if (i == 1)
+                    CamRotation.y = int.Parse(strs[i]);
+
+                if (i == 2)
+                    CamRotation.z = int.Parse(strs[i]);
+            }
+            CameraMovement_hemisphere.CamRotation = CamRotation;
+            Debug.Log(CamRotation);
         }
 
     }
