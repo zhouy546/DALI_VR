@@ -1,0 +1,32 @@
+{
+
+	"config": 
+
+		{
+            "IP":"192.186.0.20",
+            
+			"Port":"29023",
+            
+            "EnbaleMouse":"0",
+            
+            "SplitChar":" ",
+            
+            "CamEaseingValue":"0.013",
+            
+            "DefaultCameraRot":[
+                "-45",
+                "0",
+                "0" 
+            ],
+            "videoName":[
+                "01.mov",
+                "02.mov",
+                "03.mov",
+                "04.mov",
+                "05.mov",
+                "06.mov"
+                
+            ]
+            
+		}
+}
