@@ -8,12 +8,12 @@ public class ToggleMouseCtr : MonoBehaviour {
 
     private void Start()
     {
-        toggle.isOn = CameraMovement_hemisphere.EnbaleMouseCtr;
+        toggle.isOn = ValueSheet.EnbaleMouseCtr;
     }
 
 
     public void ValueChange() {
-        CameraMovement_hemisphere.EnbaleMouseCtr = toggle.isOn;
+        ValueSheet.EnbaleMouseCtr = toggle.isOn;
     }
 
     private void OnEnable()

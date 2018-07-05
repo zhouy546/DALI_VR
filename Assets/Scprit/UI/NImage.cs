@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class NImage : ImageBase {
 
+  public VideoFrameClickEvent clickEvent;
     // Use this for initialization
-   public void Start () {
+   public new void Start () {
 
-        base.initialization();
+        initialization();
 
     }
 
@@ -18,5 +19,9 @@ public class NImage : ImageBase {
 
 	}
 
+    public new virtual  void initialization() {
+        base.initialization();
 
+        clickEvent = this.GetComponent<VideoFrameClickEvent>();
+    }
 }

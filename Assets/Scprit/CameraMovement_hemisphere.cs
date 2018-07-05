@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMovement_hemisphere : MonoBehaviour {
-    public static bool EnbaleMouseCtr = false;
+    //public static bool EnbaleMouseCtr = false;
 
-    public static Vector3 DefaultCameraRot;
-    public static Vector3 CamRotation;
+   // public static float EaseingValue = 0.013f;
+
+   // public static Vector3 DefaultCameraRot;
+
+    //public static Vector3 CamRotation;
+
     Camera mCamera;
 
     Transform CamTrans;
@@ -29,9 +33,9 @@ public class CameraMovement_hemisphere : MonoBehaviour {
     }
 
     void SetupCameraAngle() {
-        CamV.localRotation = Quaternion.Euler(new Vector3(DefaultCameraRot.x, 0, 0));
-        CamZ.localRotation = Quaternion.Euler(new Vector3(0, 0, DefaultCameraRot.z));
-        CamTrans.localRotation = Quaternion.Euler(new Vector3(0, DefaultCameraRot.y, 0));
+        CamV.localRotation = Quaternion.Euler(new Vector3(ValueSheet.DefaultCameraRot.x, 0, 0));
+        CamZ.localRotation = Quaternion.Euler(new Vector3(0, 0, ValueSheet.DefaultCameraRot.z));
+        CamTrans.localRotation = Quaternion.Euler(new Vector3(0, ValueSheet.DefaultCameraRot.y, 0));
     }
 
     private void Awake()
@@ -52,7 +56,7 @@ public class CameraMovement_hemisphere : MonoBehaviour {
     }
 
     void CameraRot() {
-        if (mCamera != null && CamTrans != null && EnbaleMouseCtr)
+        if (mCamera != null && CamTrans != null && ValueSheet.EnbaleMouseCtr)
         {
             if (onSwitch)
             {
@@ -62,7 +66,7 @@ public class CameraMovement_hemisphere : MonoBehaviour {
             MouseMovement();
 
         }
-        else if (mCamera != null && CamTrans != null && !EnbaleMouseCtr)
+        else if (mCamera != null && CamTrans != null && !ValueSheet.EnbaleMouseCtr)
         {
             if (!onSwitch)
             {
@@ -70,13 +74,18 @@ public class CameraMovement_hemisphere : MonoBehaviour {
                 SetupCameraAngle();
             }
 
-            UdpMovement();
+            UdpMovement(ValueSheet.CamRotation);
         }
     }
 
-    void UdpMovement()
+    float x, y, z;
+    void UdpMovement(Vector3 cameraRotation)
     {
-        CamTrans.localRotation = Quaternion.Euler(CamRotation);
+        x = x + (cameraRotation.x - x) * ValueSheet.EaseingValue;
+        y = y + (cameraRotation.y - y) * ValueSheet.EaseingValue;
+        z = z + (cameraRotation.z - z) * ValueSheet.EaseingValue;
+
+        CamTrans.localRotation = Quaternion.Euler(new Vector3(x,y,z));
     }
 
 

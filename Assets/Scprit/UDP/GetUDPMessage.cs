@@ -19,7 +19,7 @@ public class GetUDPMessage: MonoBehaviour
 {
 
     [Tooltip("消息处理类")] public DealWithUDPMessage m_messageManage;
-    [Tooltip("接受端口号")] public static int m_ReceivePort = 29010;
+    //[Tooltip("接受端口号")] public static int m_ReceivePort = 29010;
 
     private Socket m_newsock;//定义一个socket变量
     public static IPEndPoint m_ip;//定义一个IP地址和端口号
@@ -38,7 +38,7 @@ public class GetUDPMessage: MonoBehaviour
 
     public void InitializationUdp() {
         //得到本机IP，设置TCP端口号        
-        m_ip = new IPEndPoint(IPAddress.Any, m_ReceivePort);//设置自身的IP和端口号，在这里IPAddress.Any是自动获取本机IP
+        m_ip = new IPEndPoint(IPAddress.Any, ValueSheet.m_ReceivePort);//设置自身的IP和端口号，在这里IPAddress.Any是自动获取本机IP
         m_newsock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//实例化socket对象设置寻址方案为internetwork（IP版本的4存放）,设置Soket的类型，为Dgram（支持数据报形式的数据），设置协议的类型，为UDP
         //绑定网络地址
         m_newsock.Bind(m_ip);//绑定IP

@@ -15,7 +15,7 @@ public class NetInfo : MonoBehaviour {
     }
 
     public string getPort() {
-        return GetUDPMessage.m_ReceivePort.ToString(); 
+        return ValueSheet.m_ReceivePort.ToString(); 
     }
 
     public string getAddress() {

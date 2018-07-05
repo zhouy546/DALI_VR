@@ -37,7 +37,7 @@ public class VideoBase : MonoBehaviour {
     }
 
     public void SetVideoPath(string str) {
-        path = Application.streamingAssetsPath + "/" + str;
+        path = "Video/" + str;
     }
 
     public void playVideo() {

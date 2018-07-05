@@ -22,13 +22,13 @@ public class UDPCTR : MonoBehaviour {
 
     public int GetPort()
     {
-        int port = GetUDPMessage.m_ReceivePort;
+        int port = ValueSheet.m_ReceivePort;
 
         return port;
     }
 
     public void ChnagePort() {
-        GetUDPMessage.m_ReceivePort = int.Parse(InputFieldPort.text);
+        ValueSheet.m_ReceivePort = int.Parse(InputFieldPort.text);
 
         getUDPMessage.StopUdp();
 

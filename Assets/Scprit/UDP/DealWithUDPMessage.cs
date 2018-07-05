@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 public class DealWithUDPMessage : MonoBehaviour {
   
     private string dataTest;
-    public static char[] sliceStr;
+   // public static char[] sliceStr;
     private Vector3 CamRotation;
     /// <summary>
     /// 消息处理
@@ -30,7 +30,7 @@ public class DealWithUDPMessage : MonoBehaviour {
         if (_data != "") {
             dataTest = _data;
 
-            string[] strs = dataTest.Split(sliceStr);
+            string[] strs = dataTest.Split(ValueSheet.sliceStr);
             for (int i = 0; i < strs.Length; i++)
             {
                 if (i == 0)
@@ -42,7 +42,7 @@ public class DealWithUDPMessage : MonoBehaviour {
                 if (i == 2)
                     CamRotation.z = int.Parse(strs[i]);
             }
-            CameraMovement_hemisphere.CamRotation = CamRotation;
+            ValueSheet.CamRotation = CamRotation;
             Debug.Log(CamRotation);
         }
 

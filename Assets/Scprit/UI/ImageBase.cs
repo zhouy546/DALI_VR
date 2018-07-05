@@ -33,6 +33,7 @@ public class ImageBase : IRect {
         if (ColorLTDescr != null)
         {
             CancelColorLeanTween();
+            //Debug.Log(this.name+" "+"Cancel");
         }
 
         if (currentColor == color) {
@@ -54,6 +55,7 @@ public class ImageBase : IRect {
             currentColor = color;
             if (onColorChangeComplete != null)
                 onColorChangeComplete();
+            ColorLTDescr = null;
         });
     }
     protected virtual void DoSomethingAfterColorChange()
@@ -115,7 +117,10 @@ public class ImageBase : IRect {
     }
 
     private void CancelColorLeanTween() {
+        Debug.Log(this.name+ColorLTDescr.id+"cancel");
+
         LeanTween.cancel(ColorLTDescr.id);
+
     }
 
 }

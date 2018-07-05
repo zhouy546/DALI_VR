@@ -52,8 +52,10 @@ public class TextBase : IRect {
         }).setOnComplete(delegate ()
         {
             currentColor = color;
-            if (onColorChangeComplete != null)
+            if (onColorChangeComplete != null) {
                 onColorChangeComplete();
+            }
+            ColorLTDescr = null;
         });
     }
 

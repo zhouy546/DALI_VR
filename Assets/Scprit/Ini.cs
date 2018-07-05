@@ -10,6 +10,8 @@ public class Ini : MonoBehaviour {
     private GetUDPMessage getUDPMessage;
 
     private MeshVideo meshVideo;
+
+    private CanvasCtr canvasCtr;
     // Use this for initialization
     void Start () {
         StartCoroutine(initialization());
@@ -30,6 +32,8 @@ public class Ini : MonoBehaviour {
 
         meshVideo = FindObjectOfType<MeshVideo>();
 
+        canvasCtr = FindObjectOfType<CanvasCtr>();
+
         yield return StartCoroutine(readJson.initialization());
 
         yield return StartCoroutine(cameraMovement_Hemisphere.initialization());
@@ -37,5 +41,7 @@ public class Ini : MonoBehaviour {
         meshVideo.initialization();
 
         getUDPMessage.InitializationUdp();
+
+        canvasCtr.initialization();
     }
 }
