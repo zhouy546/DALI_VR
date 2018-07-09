@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class VideoLobbyCtr : MonoBehaviour {
     bool isAwake = true;
     public GameObject VideoFrame;
-    public List<NImage> nImages = new List<NImage>();
-	// Use this for initialization
-	void Start () {
+    public List<NImage> VideoFrameNImages = new List<NImage>();
+    public List<NImage> AllNImage = new List<NImage>();
+    public List<Ntext> AllNText = new List<Ntext>();
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -17,6 +20,7 @@ public class VideoLobbyCtr : MonoBehaviour {
 	}
 
     public void Initialization() {
+
         if (isAwake) {
             for (int i = 0; i < ValueSheet.videoPath.Length; i++)
             {
@@ -26,15 +30,22 @@ public class VideoLobbyCtr : MonoBehaviour {
 
                 NImage image = _gameObject.GetComponent<NImage>();
 
+                image.initialization();
+
                 _gameObject.name= image.clickEvent.path = ValueSheet.videoPath[i]; ;
 
-                nImages.Add(image);
+                VideoFrameNImages.Add(image);
             }
 
             isAwake = !isAwake;
         }
 
 
+        //Debug.Log("AllNimages NUM"+ AllNimages.Count);
+        //foreach (var item in AllNimages)
+        //{
+        //    Debug.Log("Name" + item.name);
+        //}
     }
 
     public void Clicked(NImage _nImage) {
@@ -67,8 +78,10 @@ public class VideoLobbyCtr : MonoBehaviour {
 
     }
 
+
+
     public NImage searchNimage(NImage _nImage) {
-        foreach (var item in nImages)
+        foreach (var item in VideoFrameNImages)
         {
             if (item==_nImage)
             {
@@ -78,4 +91,5 @@ public class VideoLobbyCtr : MonoBehaviour {
 
         return null;
     }
+
 }

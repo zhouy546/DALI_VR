@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 [RequireComponent (typeof (Text))]
 public class TextBase : IRect {
+    public bool isInteractionObject;
+
     public Text text;
 
     public string currentTextContent, StartTextContent;
@@ -25,6 +27,12 @@ public class TextBase : IRect {
         currentColor = DefaultColor = text.color;
         currentTextContent = StartTextContent = text.text;
         startLocalPosition = currentLocalPosition = text.transform.localPosition;
+    }
+
+    public void setRarCastTarget(bool b)
+    {
+        text.raycastTarget = b;
+
     }
 
     public void ChangeColor(Color color, float time, LeanTweenType leanTweenType = LeanTweenType.notUsed, Action onColorChangeComplete = null)
@@ -83,7 +91,7 @@ public class TextBase : IRect {
 
     protected void ShowThisText(float time)
     {
-        ChangeAlpha(1f, time);
+        ChangeAlpha(DefaultColor.a, time);
     }
 
     public void HideAll(float time = 1)

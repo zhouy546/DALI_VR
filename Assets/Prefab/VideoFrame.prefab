@@ -46,6 +46,7 @@ MonoBehaviour:
   startScale: {x: 0, y: 0, z: 0}
   currentScale: {x: 0, y: 0, z: 0}
   rect: {fileID: 0}
+  isInteractionObject: 1
   currentColor: {r: 0, g: 0, b: 0, a: 0}
   DefaultColor: {r: 0, g: 0, b: 0, a: 0}
   TargetColor: {r: 0, g: 0, b: 0, a: 0}

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class ImageBase : IRect {
+    public bool isInteractionObject;
 
     protected delegate void OnAlphaChangeComplete();
 
@@ -15,6 +16,7 @@ public class ImageBase : IRect {
     public List<ImageBase> ChildrenimageBases;
 
     private LTDescr  ColorLTDescr;
+
 
     public new  virtual void initialization() {
 
@@ -28,6 +30,12 @@ public class ImageBase : IRect {
 
         startLocalPosition = currentLocalPosition = image.transform.localPosition;
     }
+
+    public void  setRarCastTarget(bool b) {
+        image.raycastTarget = b;
+
+    }
+
 
     public void ChangeColor(Color color, float time, LeanTweenType leanTweenType = LeanTweenType.notUsed, Action onColorChangeComplete = null) {
         if (ColorLTDescr != null)
@@ -78,7 +86,7 @@ public class ImageBase : IRect {
     }
 
     protected void ShowThisImage(float time ) {
-        ChangeAlpha(1f,time);
+        ChangeAlpha(DefaultColor.a,time);
     }
 
     public void HideAll(float time = 1) {
@@ -117,7 +125,7 @@ public class ImageBase : IRect {
     }
 
     private void CancelColorLeanTween() {
-        Debug.Log(this.name+ColorLTDescr.id+"cancel");
+        //Debug.Log(this.name+ColorLTDescr.id+"cancel");
 
         LeanTween.cancel(ColorLTDescr.id);
 

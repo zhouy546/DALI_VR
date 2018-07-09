@@ -7,10 +7,14 @@ public class NImage : ImageBase {
 
   public VideoFrameClickEvent clickEvent;
     // Use this for initialization
-   public new void Start () {
 
+    public void Awake()
+    {
+
+    }
+
+    public new void Start () {
         initialization();
-
     }
 
 

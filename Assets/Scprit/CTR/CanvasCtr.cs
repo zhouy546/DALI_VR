@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,IPointerExitHandler {
     public VideoLobbyCtr videoLobbyCtr;
-
+    public MenuCtr menuCtr;
     public GameObject console;
     public GameObject Menu;
     bool isConsoleOn;
@@ -17,29 +17,38 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
     public void initialization() {
 
         videoLobbyCtr.Initialization();
+        menuCtr.initialization();
+
+        menuCtr.InteractionToggle(isMenuOn);
+        menuCtr.HideAll();
+
     }
 
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        GameObject gameObject = eventData.pointerCurrentRaycast.gameObject;
+        if (isMenuOn) {
+            GameObject gameObject = eventData.pointerCurrentRaycast.gameObject;
 
-        videoFrameDoing(gameObject);
+            videoFrameDoing(gameObject);
+        }
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameObject gameObject = eventData.pointerCurrentRaycast.gameObject;
+        if (isMenuOn) {
+            GameObject gameObject = eventData.pointerCurrentRaycast.gameObject;
 
-        voideFrameHeight(gameObject);
-
+            voideFrameHeight(gameObject);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        videoFrameDeHighlight();
-
-
+        if (isMenuOn) {
+            videoFrameDeHighlight();
+        }
     }
 
     void videoFrameDoing(GameObject gameObject) {
@@ -67,7 +76,7 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
     void videoFrameDeHighlight() {
         if (nImage != null)
         {
-            Debug.Log("exit");
+            //Debug.Log("exit");
             videoLobbyCtr.DeHeighlight(nImage);
         }
         nImage = null;
@@ -90,15 +99,17 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
         else if(Input.GetKeyDown(KeyCode.Space)) {
             isMenuOn = !isMenuOn;
 
-            Menu.SetActive(isMenuOn);
+            menuCtr.InteractionToggle(isMenuOn);
+
             if (isMenuOn)
             {
+                menuCtr.ShowAll();
               //  Menu.GetComponent<NImage>().ShowAll();
                 PostProcessingCtr.instance.Blur();
             }
             else {
                 //Menu.GetComponent<NImage>().HideAll();
-
+                menuCtr.HideAll();
                 PostProcessingCtr.instance.Focus();
             }
         }
