@@ -33,14 +33,27 @@ public class DealWithUDPMessage : MonoBehaviour {
             string[] strs = dataTest.Split(ValueSheet.sliceStr);
             for (int i = 0; i < strs.Length; i++)
             {
-                if (i == 0)
-                    CamRotation.x =int.Parse( strs[i]);
+                try
+                {
+                    if (i == 0)
+                        CamRotation.x = int.Parse(strs[i]);
 
-                if (i == 1)
-                    CamRotation.y = int.Parse(strs[i]);
+                    if (i == 1)
+                        CamRotation.y = int.Parse(strs[i]);
 
-                if (i == 2)
-                    CamRotation.z = int.Parse(strs[i]);
+                    if (i == 2)
+                        CamRotation.z = int.Parse(strs[i]);
+
+                    if (i == 3) {
+
+                    }
+                }
+                catch (Exception)
+                {
+                    dataTest = "data format wrong: x y z ture/false" +"\n"
+                        +"current udpData: "+_data.ToString();
+                }
+
             }
             ValueSheet.CamRotation = CamRotation;
             Debug.Log(CamRotation);
@@ -49,7 +62,19 @@ public class DealWithUDPMessage : MonoBehaviour {
     }
     private void Update()
     {
+
+
        // Debug.Log("数据：" + dataTest);  
     }
+    private void OnGUI()
+    {
+        GUIStyle bb = new GUIStyle();
+        bb.normal.background = null;    //这是设置背景填充的
+        bb.normal.textColor = new Color(1.0f, 0.5f, 0.0f);   //设置字体颜色的
+        bb.fontSize = 40;       //当然，这是字体大小
 
+        //居中显示FPS
+        GUI.Label(new Rect((Screen.width / 2) - 40, 0, 200, 200), "udp message: " + dataTest, bb);
+
+    }
 }
