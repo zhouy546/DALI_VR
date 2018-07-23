@@ -162,6 +162,7 @@ MonoBehaviour:
   VideoFrameNImages: []
   AllNImage: []
   AllNText: []
+  DisplaySlotNum: 5
   DisplaySlot: []
   slotHolder: []
 --- !u!1 &120216115

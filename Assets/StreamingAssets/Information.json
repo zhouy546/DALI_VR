@@ -18,15 +18,14 @@
                 "0",
                 "0" 
             ],
-            "videoName":[
-                "01.mov",
-                "02.mov",
-                "03.mov",
-                "04.mov",
-                "05.mov",
-                "05.mov"
-                
-            ]
+      "videoName": [
+        "01.mov",
+        "02.mov",
+        "03.mov",
+        "04.mov",
+        "05.mov",
+        "06.mov"
+      ]
             
 		}
 }

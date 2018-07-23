@@ -14,6 +14,7 @@ public class VideoLobbyCtr : MonoBehaviour {
     public class SlotHolder {
         public Vector3 SlotPos;
         public Vector3 SlotScale;
+        public NImage nImage;
 
         public SlotHolder() {
 
@@ -26,7 +27,26 @@ public class VideoLobbyCtr : MonoBehaviour {
 
     }
 
-    public List<Vector3> DisplaySlot;
+
+    [System.Serializable]
+    public class DisplayHolder
+    {
+        public Vector3 SlotPos;
+        public Vector3 SlotScale;
+        public DisplayHolder()
+        {
+
+        }
+        public DisplayHolder(Vector3 _slotPos, Vector3 _slotScale)
+        {
+            SlotPos = _slotPos;
+            SlotScale = _slotScale;
+        }
+
+    }
+
+    public int DisplaySlotNum;
+    public List<DisplayHolder> DisplaySlot= new List<DisplayHolder>();
     public List<SlotHolder> slotHolder= new List<SlotHolder>();
     // Use this for initialization
     void Start () {
@@ -45,7 +65,7 @@ public class VideoLobbyCtr : MonoBehaviour {
     public void Initialization() {
 
         if (isAwake) {
-            for (int i = 0; i < ValueSheet.videoPath.Length; i++)
+            for (int i = 0; i < DisplaySlotNum+2; i++)
             {
                 GameObject _gameObject = Instantiate(VideoFrame);
 
@@ -57,11 +77,10 @@ public class VideoLobbyCtr : MonoBehaviour {
 
                 image.initialization();
 
-                _gameObject.name= image.clickEvent.path = ValueSheet.videoPath[i]; ;
+                _gameObject.name = i.ToString();
+                    //= image.clickEvent.path = ValueSheet.videoPath[i]; ;
 
-                VideoFrameNImages.Add(image);
-
-                
+                VideoFrameNImages.Add(image);          
 
             }
             //----------------
@@ -72,68 +91,53 @@ public class VideoLobbyCtr : MonoBehaviour {
     }
 
     void GenerateSlot() {
-        if (ValueSheet.videoPath.Length == 1)
+
+
+        for (int i = 0; i < DisplaySlotNum + 2; i++) { 
+
+            float xPos = Mapping(i, 0, DisplaySlotNum +2- 1, -800f, 800f);
+
+            float scale = Mathf.Sin(Mathf.Deg2Rad * Mapping(i, 0, DisplaySlotNum +2- 1, 0, 180));
+
+            slotHolder.Add(new SlotHolder(new Vector3(xPos, 0, 0), new Vector3(scale, scale, scale)));
+
+            slotHolder[i].nImage = VideoFrameNImages[i];
+        }
+
+        foreach (var item in slotHolder)
         {
-            DisplaySlot = new List<Vector3>(1);
+            item.nImage.SetLocation(item.SlotPos,0);
+            item.nImage.SetScale(item.SlotScale, 0);
 
         }
-        else if (ValueSheet.videoPath.Length == 2)
-        {
-            DisplaySlot = new List<Vector3>(3);
-        }
-        //else if (ValueSheet.videoPath.Length > 2 && ValueSheet.videoPath.Length % 2 == 1)
-        //{
-        //    for (int i = 0; i < ValueSheet.videoPath.Length; i++)
-        //    {
-        //        slotHolder.Add(new SlotHolder());
-        //    }
 
-        //    for (int i = 0; i < VideoFrameNImages.Count; i++)
-        //    {
 
-        //        float xPos =Mapping(i, 0, ValueSheet.videoPath.Length-1, -500f, 500f);
-
-        //        float scale =Mathf.Sin( Mathf.Deg2Rad*Mapping(i, 0, ValueSheet.videoPath.Length-1, 30, 150));
-
-        //        slotHolder[i] = new SlotHolder(new Vector3(xPos, 0, 0), new Vector3(scale,scale,scale));
-
-        //        VideoFrameNImages[i].SetLocation(slotHolder[i].SlotPos,0f);
-
-        //        VideoFrameNImages[i].SetScale(slotHolder[i].SlotScale, 0f);
-
-        //    }
-        //}
-        //else if (ValueSheet.videoPath.Length > 2 && ValueSheet.videoPath.Length % 2 == 0) {
-        //    for (int i = 0; i < ValueSheet.videoPath.Length+1; i++)
-        //    {
-        //        slotHolder.Add(new SlotHolder());
-        //    }
-
-        //}
     }
 
     public void JoyStickMoveLeft() {
-        NImage temp = VideoFrameNImages[VideoFrameNImages.Count-1];
 
-        for (int i = 0; i < ValueSheet.videoPath.Length; i++)
-        {
-            int Num = GetLeftNum(i);
-            VideoFrameNImages[i].SetLocation(slotHolder[Num].SlotPos, .5f);
-            VideoFrameNImages[i].SetScale(slotHolder[Num].SlotScale,.5f);
-        }
 
-        for (int i = VideoFrameNImages.Count-1; i >= 0; i--)
-        {
-            if (i != 0)
-            {
-                VideoFrameNImages[i] = VideoFrameNImages[i - 1];
+        //NImage temp = VideoFrameNImages[VideoFrameNImages.Count-1];
 
-            }
-            else if(i==0)
-            {
-                VideoFrameNImages[i] = temp;
-            }
-        }
+        //for (int i = 0; i < ValueSheet.videoPath.Length; i++)
+        //{
+        //    int Num = GetLeftNum(i);
+        //    VideoFrameNImages[i].SetLocation(slotHolder[Num].SlotPos, .5f);
+        //    VideoFrameNImages[i].SetScale(slotHolder[Num].SlotScale,.5f);
+        //}
+
+        //for (int i = VideoFrameNImages.Count-1; i >= 0; i--)
+        //{
+        //    if (i != 0)
+        //    {
+        //        VideoFrameNImages[i] = VideoFrameNImages[i - 1];
+
+        //    }
+        //    else if(i==0)
+        //    {
+        //        VideoFrameNImages[i] = temp;
+        //    }
+        //}
     }
 
     public void JoyStickMoveRight() {
@@ -155,7 +159,7 @@ public class VideoLobbyCtr : MonoBehaviour {
         }
     }
 
-    int GetRightNum(int value) {
+    int GetLeftNum(int value) {
         int temp = value-1;
 
         if (temp < 0)
@@ -166,7 +170,7 @@ public class VideoLobbyCtr : MonoBehaviour {
         return temp;
     }
 
-    int GetLeftNum(int value)
+    int GetRightNum(int value)
     {
         int temp = value + 1;
 
