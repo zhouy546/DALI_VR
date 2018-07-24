@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class ValueSheet   {
- 
+
+    public static bool  EnterTrigger;
+
+    public static bool ExitTrigger;
+
     public static bool EnbaleMouseCtr = false;
 
     public static float EaseingValue = 0.013f;

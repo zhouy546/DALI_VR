@@ -5,18 +5,23 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,IPointerExitHandler {
+    public static CanvasCtr instance;
+
     public VideoLobbyCtr videoLobbyCtr;
     public MenuCtr menuCtr;
     public GameObject console;
     public GameObject Menu;
     bool isConsoleOn;
-    bool isMenuOn;
+   public bool isMenuOn;
 
     NImage nImage;
 
     public void initialization() {
+        if (instance == null) {
+            instance = this;
+        } 
 
-        videoLobbyCtr.Initialization();
+        StartCoroutine(videoLobbyCtr.Initialization());
         menuCtr.initialization();
 
         menuCtr.InteractionToggle(isMenuOn);
@@ -27,38 +32,38 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (isMenuOn) {
-            GameObject gameObject = eventData.pointerCurrentRaycast.gameObject;
+        //if (isMenuOn) {
+        //    GameObject gameObject = eventData.pointerCurrentRaycast.gameObject;
 
-            videoFrameDoing(gameObject);
-        }
+        //    videoFrameDoing(gameObject);
+        //}
 
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isMenuOn) {
-            GameObject gameObject = eventData.pointerCurrentRaycast.gameObject;
+        //if (isMenuOn) {
+        //    GameObject gameObject = eventData.pointerCurrentRaycast.gameObject;
 
-            voideFrameHeight(gameObject);
-        }
+        //    voideFrameHeight(gameObject);
+        //}
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (isMenuOn) {
-            videoFrameDeHighlight();
-        }
+        //if (isMenuOn) {
+        //    videoFrameDeHighlight();
+        //}
     }
 
     void videoFrameDoing(GameObject gameObject) {
 
-        if (gameObject.GetComponent<NImage>() != null)
-        {
-            NImage nImage = gameObject.GetComponent<NImage>();
+        //if (gameObject.GetComponent<NImage>() != null)
+        //{
+        //    NImage nImage = gameObject.GetComponent<NImage>();
 
-            nImage.clickEvent.PlayVideo();
-        }
+        //    nImage.clickEvent.PlayVideo();
+        //}
     }
 
 
@@ -91,6 +96,25 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
 	
 	// Update is called once per frame
 	void Update () {
+        //-----------------------------------UDP----------------------------
+        if (!isMenuOn) {
+            //打开菜单
+            if (ValueSheet.ExitTrigger || ValueSheet.EnterTrigger)
+            {
+                isMenuOn = !isMenuOn;
+
+                menuCtr.ShowAll();
+              
+                PostProcessingCtr.instance.Blur();
+
+                videoLobbyCtr.LookingForCurrentPlay();
+            }
+        }
+
+
+
+
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             isConsoleOn = !isConsoleOn;
@@ -106,6 +130,8 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
                 menuCtr.ShowAll();
               //  Menu.GetComponent<NImage>().ShowAll();
                 PostProcessingCtr.instance.Blur();
+
+                videoLobbyCtr.LookingForCurrentPlay();
             }
             else {
                 //Menu.GetComponent<NImage>().HideAll();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MeshVideo : VideoBase {
-
+    public static MeshVideo instance;
     // Use this for initialization
     void Start()
     {
@@ -16,6 +16,11 @@ public class MeshVideo : VideoBase {
 	}
 
     public override void initialization() {
+        
         base.initialization();
+
+        if (instance == null) {
+            instance = this;
+        }
     }
 }

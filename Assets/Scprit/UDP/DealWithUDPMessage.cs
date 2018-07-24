@@ -21,6 +21,7 @@ public class DealWithUDPMessage : MonoBehaviour {
     private string dataTest;
    // public static char[] sliceStr;
     private Vector3 CamRotation;
+    //private bool enterTrigger, exitTrigger;
     /// <summary>
     /// 消息处理
     /// </summary>
@@ -36,25 +37,30 @@ public class DealWithUDPMessage : MonoBehaviour {
                 try
                 {
                     if (i == 0)
-                        CamRotation.x = int.Parse(strs[i]);
+                        CamRotation.x =UtilityFunction.Mapping( float.Parse(strs[i]),-1,1,-15,45);
 
                     if (i == 1)
-                        CamRotation.y = int.Parse(strs[i]);
+                        CamRotation.y = UtilityFunction.Mapping(float.Parse(strs[i]),-1,1,-60,60);
 
                     if (i == 2)
-                        CamRotation.z = int.Parse(strs[i]);
+                        CamRotation.z = float.Parse(strs[i])*0;
 
                     if (i == 3) {
-
+                        ValueSheet.EnterTrigger =Convert.ToBoolean( int.Parse(strs[i]));
+                    }
+                    if (i == 4) {
+                        ValueSheet.ExitTrigger = Convert.ToBoolean(int.Parse(strs[i]));
                     }
                 }
                 catch (Exception)
                 {
-                    dataTest = "data format wrong: x y z ture/false" +"\n"
+                    dataTest = "data format wrong: x y z 1/0 1/0" +"\n"
                         +"current udpData: "+_data.ToString();
                 }
 
             }
+            
+
             ValueSheet.CamRotation = CamRotation;
             Debug.Log(CamRotation);
         }

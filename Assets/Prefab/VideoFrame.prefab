@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114075670539711678}
   - component: {fileID: 114338533140039396}
   - component: {fileID: 114065196276503504}
+  - component: {fileID: 223813376049088290}
   m_Layer: 5
   m_Name: VideoFrame
   m_TagString: Untagged
@@ -49,7 +50,7 @@ MonoBehaviour:
   isInteractionObject: 1
   currentColor: {r: 0, g: 0, b: 0, a: 0}
   DefaultColor: {r: 0, g: 0, b: 0, a: 0}
-  TargetColor: {r: 0, g: 0, b: 0, a: 0}
+  TargetColor: {r: 1, g: 0, b: 0, a: 1}
   image: {fileID: 0}
   ChildrenimageBases: []
   clickEvent: {fileID: 114338533140039396}
@@ -98,6 +99,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1604042541022102}
+--- !u!223 &223813376049088290
+Canvas:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1604042541022102}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!224 &224692076984437988
 RectTransform:
   m_ObjectHideFlags: 1

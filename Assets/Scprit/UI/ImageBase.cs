@@ -10,7 +10,7 @@ public class ImageBase : IRect {
 
     protected delegate void OnAlphaChangeComplete();
 
-    public Color currentColor, DefaultColor,TargetColor;
+    public Color currentColor, DefaultColor,TargetColor,PervioudColor;
     public Image image;
 
     public List<ImageBase> ChildrenimageBases;
@@ -26,7 +26,7 @@ public class ImageBase : IRect {
 
         ChildrenimageBases = GetChindrenImg();
 
-        currentColor = DefaultColor =image.color;
+       PervioudColor= currentColor = DefaultColor =image.color;
 
         startLocalPosition = currentLocalPosition = image.transform.localPosition;
     }
@@ -38,6 +38,7 @@ public class ImageBase : IRect {
 
 
     public void ChangeColor(Color color, float time, LeanTweenType leanTweenType = LeanTweenType.notUsed, Action onColorChangeComplete = null) {
+        PervioudColor = image.color;
         if (ColorLTDescr != null)
         {
             CancelColorLeanTween();

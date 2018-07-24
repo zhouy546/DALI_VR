@@ -159,12 +159,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VideoFrame: {fileID: 1604042541022102, guid: ac525312e4037904599b42a2b1ee75d4, type: 2}
-  VideoFrameNImages: []
   AllNImage: []
   AllNText: []
+  SpritesListData: []
+  VideoFrameNImages: []
   DisplaySlotNum: 5
-  DisplaySlot: []
   slotHolder: []
+  canvasCtr: {fileID: 1312512662}
 --- !u!1 &120216115
 GameObject:
   m_ObjectHideFlags: 0
@@ -2837,6 +2838,7 @@ MonoBehaviour:
   menuCtr: {fileID: 2094217274}
   console: {fileID: 208852249}
   Menu: {fileID: 2094217269}
+  isMenuOn: 0
 --- !u!1 &1389959429
 GameObject:
   m_ObjectHideFlags: 0
@@ -3028,6 +3030,7 @@ MonoBehaviour:
   currentColor: {r: 0, g: 0, b: 0, a: 0}
   DefaultColor: {r: 0, g: 0, b: 0, a: 0}
   TargetColor: {r: 0, g: 0, b: 0, a: 0}
+  PervioudColor: {r: 0, g: 0, b: 0, a: 0}
   image: {fileID: 0}
   ChildrenimageBases: []
   clickEvent: {fileID: 0}
@@ -4481,6 +4484,7 @@ MonoBehaviour:
   currentColor: {r: 0, g: 0, b: 0, a: 0}
   DefaultColor: {r: 0, g: 0, b: 0, a: 0}
   TargetColor: {r: 0, g: 0, b: 0, a: 0}
+  PervioudColor: {r: 0, g: 0, b: 0, a: 0}
   image: {fileID: 0}
   ChildrenimageBases: []
   clickEvent: {fileID: 0}

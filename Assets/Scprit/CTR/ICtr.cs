@@ -20,14 +20,14 @@ public class ICtr : MonoBehaviour {
     {
         foreach (var item in AllNimages)
         {
-            item.ShowAll(time);
-            item.ChangeColor(item.DefaultColor, 1f);
+            //item.ShowAll(time);
+            item.ChangeColor(item.PervioudColor, 1f);
         }
 
 
         foreach (var item in Alltexts)
         {
-            item.ShowAll(time);
+          //  item.ShowAll(time);
             item.ChangeColor(item.DefaultColor, 1f);
         }
     }

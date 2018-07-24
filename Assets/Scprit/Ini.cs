@@ -18,10 +18,6 @@ public class Ini : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
    public IEnumerator initialization() {
         readJson = FindObjectOfType<ReadJson>();
