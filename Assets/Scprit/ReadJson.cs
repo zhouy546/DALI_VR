@@ -109,7 +109,7 @@ public class ReadJson : MonoBehaviour {
 
        string Zrot = angles[2];
 
-        ValueSheet.DefaultCameraRot = new Vector3(int.Parse(Xrot), int.Parse(Yrot), int.Parse(Zrot));
+        ValueSheet.CamRotation= ValueSheet.DefaultCameraRot = new Vector3(int.Parse(Xrot), int.Parse(Yrot), int.Parse(Zrot));
     }
 
     void getSplitChar() {

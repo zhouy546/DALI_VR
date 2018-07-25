@@ -9,6 +9,8 @@ public class Ini : MonoBehaviour {
 
     private GetUDPMessage getUDPMessage;
 
+    private SendUPDData sendUPDData;
+
     private MeshVideo meshVideo;
 
     private CanvasCtr canvasCtr;
@@ -24,6 +26,8 @@ public class Ini : MonoBehaviour {
 
         cameraMovement_Hemisphere = FindObjectOfType<CameraMovement_hemisphere>();
 
+        sendUPDData = FindObjectOfType<SendUPDData>();
+
         getUDPMessage = FindObjectOfType<GetUDPMessage>();
 
         meshVideo = FindObjectOfType<MeshVideo>();
@@ -37,6 +41,8 @@ public class Ini : MonoBehaviour {
         meshVideo.initialization();
 
         getUDPMessage.InitializationUdp();
+
+        sendUPDData.initialization();
 
         canvasCtr.initialization();
     }

@@ -37,13 +37,13 @@ public class DealWithUDPMessage : MonoBehaviour {
                 try
                 {
                     if (i == 0)
-                        CamRotation.x =UtilityFunction.Mapping( float.Parse(strs[i]),-1,1,-15,45);
+                        CamRotation.x =UtilityFunction.Mapping( float.Parse(strs[i]),-1,1,-30,30);
 
                     if (i == 1)
-                        CamRotation.y = UtilityFunction.Mapping(float.Parse(strs[i]),-1,1,-60,60);
+                        CamRotation.y = UtilityFunction.Mapping(float.Parse(strs[i]),-1,1,-30,30);
 
                     if (i == 2)
-                        CamRotation.z = float.Parse(strs[i])*0;
+                        CamRotation.z = UtilityFunction.Mapping(float.Parse(strs[i]), -1, 1, -5, 5);
 
                     if (i == 3) {
                         ValueSheet.EnterTrigger =Convert.ToBoolean( int.Parse(strs[i]));
@@ -51,6 +51,8 @@ public class DealWithUDPMessage : MonoBehaviour {
                     if (i == 4) {
                         ValueSheet.ExitTrigger = Convert.ToBoolean(int.Parse(strs[i]));
                     }
+
+                    Debug.Log("GET DATA");
                 }
                 catch (Exception)
                 {

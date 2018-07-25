@@ -11,7 +11,11 @@ using System.Text;
 /// </summary>
 public class SendUPDData : MonoBehaviour {
 
+    public static SendUPDData instance;
+
     public string udpData_str;
+    string _sSend = "";
+
     [Tooltip("接受端口号")] public int m_ReceivePort = 29010;//接收的端口号 
     Socket udpserver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
     private string m_ip;//定义一个IP地址
@@ -37,14 +41,42 @@ public class SendUPDData : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+
+    }
+
+    public void initialization() {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
         m_ip = Network.player.ipAddress;
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        string _sSend = "";
-        _sSend = udpData_str;
-        udp_Send(_sSend, m_ip, m_ReceivePort);
+        udpData_str = CreateMessage();
+        if (_sSend != udpData_str) {
+            _sSend = udpData_str;
+            udp_Send(_sSend, m_ip, m_ReceivePort);
+        }
+    }
+
+    string CreateMessage() {
+        string splitChar = " ";
+
+        string x = UtilityFunction.Mapping(ValueSheet.CamRotation.x, -30, 30, -1, 1).ToString();
+
+        string y = UtilityFunction.Mapping(ValueSheet.CamRotation.y, -30, 30, -1, 1).ToString();
+
+        string z = UtilityFunction.Mapping(ValueSheet.CamRotation.z, -5, 5, -1, 1).ToString();
+
+        string str = x+ splitChar+y+ splitChar+z;
+
+            return str;
+
     }
 }

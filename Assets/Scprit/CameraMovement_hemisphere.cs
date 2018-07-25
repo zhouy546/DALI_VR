@@ -13,11 +13,11 @@ public class CameraMovement_hemisphere : MonoBehaviour {
 
     Camera mCamera;
 
-    Transform CamTrans;
+    Transform CamTransZ;
 
-    public Transform CamV;
+    public Transform CamY;
 
-    public Transform CamZ;
+    public Transform CamX;
 
 
     float ZRot;
@@ -27,15 +27,15 @@ public class CameraMovement_hemisphere : MonoBehaviour {
 
         yield return mCamera = this.GetComponent<Camera>();
 
-        yield return CamTrans = this.GetComponent<Transform>();
+        yield return CamTransZ = this.GetComponent<Transform>();
 
         SetupCameraAngle();
     }
 
     void SetupCameraAngle() {
-        CamV.localRotation = Quaternion.Euler(new Vector3(ValueSheet.DefaultCameraRot.x, 0, 0));
-        CamZ.localRotation = Quaternion.Euler(new Vector3(0, 0, ValueSheet.DefaultCameraRot.z));
-        CamTrans.localRotation = Quaternion.Euler(new Vector3(0, ValueSheet.DefaultCameraRot.y, 0));
+        CamY.localRotation = Quaternion.Euler(new Vector3(ValueSheet.DefaultCameraRot.x, 0, 0));
+        CamX.localRotation = Quaternion.Euler(new Vector3(0, 0, ValueSheet.DefaultCameraRot.z));
+        CamTransZ.localRotation = Quaternion.Euler(new Vector3(0, ValueSheet.DefaultCameraRot.y, 0));
     }
 
     private void Awake()
@@ -56,7 +56,7 @@ public class CameraMovement_hemisphere : MonoBehaviour {
     }
 
     void CameraRot() {
-        if (mCamera != null && CamTrans != null && ValueSheet.EnbaleMouseCtr)
+        if (mCamera != null && CamTransZ != null && ValueSheet.EnbaleMouseCtr)
         {
             if (onSwitch)
             {
@@ -66,7 +66,7 @@ public class CameraMovement_hemisphere : MonoBehaviour {
             MouseMovement();
 
         }
-        else if (mCamera != null && CamTrans != null && !ValueSheet.EnbaleMouseCtr)
+        else if (mCamera != null && CamTransZ != null && !ValueSheet.EnbaleMouseCtr)
         {
             if (!onSwitch)
             {
@@ -75,6 +75,7 @@ public class CameraMovement_hemisphere : MonoBehaviour {
             }
 
             UdpMovement(ValueSheet.CamRotation);
+            Debug.Log("RUNNING");
         }
     }
 
@@ -85,7 +86,10 @@ public class CameraMovement_hemisphere : MonoBehaviour {
         y = y + (cameraRotation.y - y) * ValueSheet.EaseingValue;
         z = z + (cameraRotation.z - z) * ValueSheet.EaseingValue;
 
-        CamTrans.localRotation = Quaternion.Euler(new Vector3(x,y,z));
+        CamTransZ.localRotation = Quaternion.Euler(new Vector3(0,0,z));
+        CamY.localRotation = Quaternion.Euler(new Vector3(0, y, 0));
+        CamX.localRotation = Quaternion.Euler(new Vector3(x, 0, 0));
+        //CamTransZ.localRotation = new Quaternion(x, y, z, 0.5f);
     }
 
 
@@ -97,29 +101,29 @@ public class CameraMovement_hemisphere : MonoBehaviour {
 
         float Yaw = Input.GetAxis("Rotate");
 
-        float YRot = CamTrans.localRotation.eulerAngles.y + XAxis;
+        float YRot = CamY.localRotation.eulerAngles.y + XAxis;
 
-        float XRot = CamV.rotation.eulerAngles.x - YAxis;
+        float XRot = CamX.localRotation.eulerAngles.x - YAxis;
 
-
+        float ZRot = CamTransZ.localRotation.eulerAngles.z - Yaw;
 
         if (checkDeg(YRot, 0.5f))
         {
 
-            CamTrans.localRotation = Quaternion.Euler(CamTrans.localRotation.eulerAngles.x, YRot, CamTrans.localRotation.eulerAngles.z);
+            CamY.localRotation = Quaternion.Euler(0, YRot, 0);
 
         }
 
         if (checkDeg(XRot, 0.866f))
         {
 
-            CamV.localRotation = Quaternion.Euler(XRot, CamV.localRotation.eulerAngles.y, CamV.localRotation.eulerAngles.z);
+            CamX.localRotation = Quaternion.Euler(XRot, 0, 0);
 
         }
 
         //ZRot =ZRot+(XAxis - ZRot)*0.033f;
 
-        //    CamZ.localRotation = Quaternion.Euler(CamZ.localRotation.eulerAngles.x, CamZ.localRotation.eulerAngles.y, -ZRot*10);
+        CamTransZ.localRotation = Quaternion.Euler(0,0, ZRot);
 
     }
 
