@@ -63,7 +63,7 @@ public class ReadJson : MonoBehaviour {
 
         getPort();
 
-        getEnableMouse();
+        //getEnableMouse();
 
         getSplitChar();
 
@@ -117,11 +117,11 @@ public class ReadJson : MonoBehaviour {
         ValueSheet.sliceStr = charConvert(SplitChar);
     }
 
-    void getEnableMouse() {
-     string   enableMouse = itemDate["config"]["EnbaleMouse"].ToString();//get 是否开启鼠标控制
-        ValueSheet.EnbaleMouseCtr = boolConvert(enableMouse);
+    //void getEnableMouse() {
+    // string   enableMouse = itemDate["config"]["EnbaleMouse"].ToString();//get 是否开启鼠标控制
+    //    ValueSheet.EnbaleMouseCtr = boolConvert(enableMouse);
 
-    }
+    //}
 
     void getPort() {
      string   port = itemDate["config"]["Port"].ToString();//get port;

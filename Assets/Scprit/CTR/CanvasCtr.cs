@@ -93,9 +93,9 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
     void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         //-----------------------------------UDP----------------------------
         if (!isMenuOn) {
             //打开菜单
@@ -104,7 +104,7 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
                 isMenuOn = !isMenuOn;
 
                 menuCtr.ShowAll();
-              
+
                 PostProcessingCtr.instance.Blur();
 
                 videoLobbyCtr.LookingForCurrentPlay();
@@ -120,20 +120,21 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
             isConsoleOn = !isConsoleOn;
             console.SetActive(isConsoleOn);
         }
-        else if(Input.GetKeyDown(KeyCode.Space)) {
-            isMenuOn = !isMenuOn;
 
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            isMenuOn = !isMenuOn;
             menuCtr.InteractionToggle(isMenuOn);
 
             if (isMenuOn)
             {
                 menuCtr.ShowAll();
-              //  Menu.GetComponent<NImage>().ShowAll();
+                //  Menu.GetComponent<NImage>().ShowAll();
                 PostProcessingCtr.instance.Blur();
 
                 videoLobbyCtr.LookingForCurrentPlay();
             }
             else {
+                videoLobbyCtr.PlayVideo();
                 //Menu.GetComponent<NImage>().HideAll();
                 menuCtr.HideAll();
                 PostProcessingCtr.instance.Focus();
@@ -141,5 +142,5 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
         }
 
 
-	}
+    }
 }

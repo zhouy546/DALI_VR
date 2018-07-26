@@ -153,14 +153,19 @@ public class VideoLobbyCtr : MonoBehaviour {
     void Update () {
         if (canvasCtr.isMenuOn)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
                 JoyStickMoveLeft();
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow)) {
                 JoyStickMoveRight();
 
-            if (Input.GetKeyDown(KeyCode.A))
-                PlayVideo();
+            }
+
+            //if (Input.GetKeyDown(KeyCode.A)) {
+            //    PlayVideo();
+            //}
         }
     }
 

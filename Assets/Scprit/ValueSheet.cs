@@ -8,7 +8,7 @@ public static class ValueSheet   {
 
     public static bool ExitTrigger;
 
-    public static bool EnbaleMouseCtr = false;
+    //public static bool EnbaleMouseCtr = false;
 
     public static float EaseingValue = 0.013f;
 

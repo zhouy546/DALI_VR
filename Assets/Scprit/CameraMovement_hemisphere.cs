@@ -56,17 +56,7 @@ public class CameraMovement_hemisphere : MonoBehaviour {
     }
 
     void CameraRot() {
-        if (mCamera != null && CamTransZ != null && ValueSheet.EnbaleMouseCtr)
-        {
-            if (onSwitch)
-            {
-                onSwitch = false;
-            }
-
-            MouseMovement();
-
-        }
-        else if (mCamera != null && CamTransZ != null && !ValueSheet.EnbaleMouseCtr)
+        if (mCamera != null && CamTransZ != null )
         {
             if (!onSwitch)
             {
@@ -74,58 +64,80 @@ public class CameraMovement_hemisphere : MonoBehaviour {
                 SetupCameraAngle();
             }
 
-            UdpMovement(ValueSheet.CamRotation);
-            Debug.Log("RUNNING");
+            JoyStickMovement(ref ValueSheet.CamRotation);
+            //Debug.Log("RUNNING");
         }
     }
 
-    float x, y, z;
-    void UdpMovement(Vector3 cameraRotation)
+
+    float tempzAxis, tempxAxis;
+    float currentZAxis, currentXAxis;
+
+    void JoyStickMovement(ref Vector3 cameraRotation)
     {
-        x = x + (cameraRotation.x - x) * ValueSheet.EaseingValue;
-        y = y + (cameraRotation.y - y) * ValueSheet.EaseingValue;
-        z = z + (cameraRotation.z - z) * ValueSheet.EaseingValue;
 
-        CamTransZ.localRotation = Quaternion.Euler(new Vector3(0,0,z));
-        CamY.localRotation = Quaternion.Euler(new Vector3(0, y, 0));
-        CamX.localRotation = Quaternion.Euler(new Vector3(x, 0, 0));
-        //CamTransZ.localRotation = new Quaternion(x, y, z, 0.5f);
+        float zAxis = -Input.GetAxis("Mouse X");
+        float xAxis = Input.GetAxis("Mouse Y");
+
+        #region value filter 
+        //--z--filter
+        if (tempzAxis == 0 && zAxis == 0)
+        {
+            currentZAxis = 0;
+        }
+        else if (zAxis == 0 && tempzAxis != 0) {
+            currentZAxis = tempzAxis;
+        } else if(zAxis !=0 && tempzAxis != 0){
+            currentZAxis = zAxis;
+        }
+        //----X---filter
+        if (tempxAxis == 0 && xAxis == 0)
+        {
+            currentXAxis = 0;
+        }
+        else if (xAxis == 0 && tempxAxis != 0)
+        {
+            currentXAxis = tempxAxis;
+        }
+        else if (xAxis != 0 && tempxAxis != 0)
+        {
+            currentXAxis = xAxis;
+        }
+        #endregion
+
+        float cameraZ = cameraRotation.z;
+
+        float cameraX = cameraRotation.x;
+
+        float cameraY = cameraRotation.y;
+
+        float z = UtilityFunction.Mapping(currentZAxis, -1.5f, 1.5f, -10f, 10f);
+
+        float x = UtilityFunction.Mapping(currentXAxis, -1.5f, 1.5f, -30f, 30f);
+
+        float y = UtilityFunction.Mapping(z, -5, 5, 15, -15);
+
+        cameraZ = cameraZ + (z - cameraZ) * ValueSheet.EaseingValue;
+
+        cameraX = cameraX + (x - cameraX) * ValueSheet.EaseingValue;
+
+        cameraY = cameraY + (y - cameraY) * ValueSheet.EaseingValue;
+
+        cameraRotation = new Vector3(cameraX, cameraY, cameraZ);
+
+        CamTransZ.localRotation = Quaternion.Euler(new Vector3(0, 0, cameraRotation.z));
+
+        CamX.localRotation = Quaternion.Euler(new Vector3(cameraRotation.x, 0, 0));
+
+        CamY.localRotation = Quaternion.Euler(new Vector3(0, cameraRotation.y, 0));
+
+        tempzAxis = zAxis;
+
+        tempxAxis = xAxis;
     }
 
 
-    void MouseMovement() {
-
-        float XAxis = Input.GetAxis("Mouse X");
-
-        float YAxis = Input.GetAxis("Mouse Y");
-
-        float Yaw = Input.GetAxis("Rotate");
-
-        float YRot = CamY.localRotation.eulerAngles.y + XAxis;
-
-        float XRot = CamX.localRotation.eulerAngles.x - YAxis;
-
-        float ZRot = CamTransZ.localRotation.eulerAngles.z - Yaw;
-
-        if (checkDeg(YRot, 0.5f))
-        {
-
-            CamY.localRotation = Quaternion.Euler(0, YRot, 0);
-
-        }
-
-        if (checkDeg(XRot, 0.866f))
-        {
-
-            CamX.localRotation = Quaternion.Euler(XRot, 0, 0);
-
-        }
-
-        //ZRot =ZRot+(XAxis - ZRot)*0.033f;
-
-        CamTransZ.localRotation = Quaternion.Euler(0,0, ZRot);
-
-    }
+   
 
     bool checkDeg(float deg,float value) {
         if (Mathf.Abs(Mathf.Sin(deg * Mathf.Deg2Rad)) < value)
