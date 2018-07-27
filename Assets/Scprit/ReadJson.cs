@@ -87,11 +87,28 @@ public class ReadJson : MonoBehaviour {
         ValueSheet.videoPath = paths.ToArray();
     }
 
-        void getCameraEaseValue() {
+    void getCameraEaseValue() {
 
         string CameraEaseValue = itemDate["config"]["CamEaseingValue"].ToString();
 
         ValueSheet.EaseingValue = float.Parse(CameraEaseValue);
+    }
+
+
+    void GetCamMaxiumAngle() {
+        List<string> angles = new List<string>();
+
+        for (int i = 0; i < itemDate["config"]["CameraMaxRot"].Count; i++)
+        {
+            angles.Add(itemDate["config"]["CameraMaxRot"][i].ToString());
+        }
+
+        ValueSheet.Cam_X_RotMaxium =float.Parse( angles[0]);
+
+        ValueSheet.Cam_Y_RotMaxium = float.Parse(angles[1]);
+
+        ValueSheet.Cam_Z_RotMaxium = float.Parse(angles[2]);
+
     }
 
     void getCameraRot() {

@@ -72,7 +72,6 @@ public class CameraMovement_hemisphere : MonoBehaviour {
 
     float tempzAxis, tempxAxis;
     float currentZAxis, currentXAxis;
-
     void JoyStickMovement(ref Vector3 cameraRotation)
     {
 
@@ -86,9 +85,9 @@ public class CameraMovement_hemisphere : MonoBehaviour {
             currentZAxis = 0;
         }
         else if (zAxis == 0 && tempzAxis != 0) {
-            currentZAxis = tempzAxis;
-        } else if(zAxis !=0 && tempzAxis != 0){
-            currentZAxis = zAxis;
+            currentZAxis = Mathf.Clamp( tempzAxis,-1.5f,1.5f);
+        } else if (zAxis != 0 && tempzAxis != 0) {
+            currentZAxis = Mathf.Clamp(zAxis, -1.5f, 1.5f);
         }
         //----X---filter
         if (tempxAxis == 0 && xAxis == 0)
@@ -97,11 +96,11 @@ public class CameraMovement_hemisphere : MonoBehaviour {
         }
         else if (xAxis == 0 && tempxAxis != 0)
         {
-            currentXAxis = tempxAxis;
+            currentXAxis = Mathf.Clamp(tempxAxis, -1.5f, 1.5f);
         }
         else if (xAxis != 0 && tempxAxis != 0)
         {
-            currentXAxis = xAxis;
+            currentXAxis = Mathf.Clamp(xAxis, -1.5f, 1.5f);
         }
         #endregion
 
@@ -111,11 +110,15 @@ public class CameraMovement_hemisphere : MonoBehaviour {
 
         float cameraY = cameraRotation.y;
 
-        float z = UtilityFunction.Mapping(currentZAxis, -1.5f, 1.5f, -10f, 10f);
 
-        float x = UtilityFunction.Mapping(currentXAxis, -1.5f, 1.5f, -30f, 30f);
 
-        float y = UtilityFunction.Mapping(z, -5, 5, 15, -15);
+       float  z = UtilityFunction.Mapping(currentZAxis, -1.5f, 1.5f, -ValueSheet.Cam_Z_RotMaxium, ValueSheet.Cam_Z_RotMaxium);
+
+       float  x = UtilityFunction.Mapping(currentXAxis, -1.5f, 1.5f, -ValueSheet.Cam_X_RotMaxium, ValueSheet.Cam_X_RotMaxium);
+
+       float  y = UtilityFunction.Mapping(z, -ValueSheet.Cam_Z_RotMaxium, ValueSheet.Cam_Z_RotMaxium, ValueSheet.Cam_Y_RotMaxium, -ValueSheet.Cam_Y_RotMaxium);
+
+
 
         cameraZ = cameraZ + (z - cameraZ) * ValueSheet.EaseingValue;
 
@@ -134,6 +137,9 @@ public class CameraMovement_hemisphere : MonoBehaviour {
         tempzAxis = zAxis;
 
         tempxAxis = xAxis;
+
+
+
     }
 
 

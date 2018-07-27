@@ -18,6 +18,9 @@ public class VideoLobbyCtr : MonoBehaviour {
 
     public List<ScrollSpritesInfo> ScrollSpritesList = new List<ScrollSpritesInfo>();
 
+
+    private bool doingOnce;
+
     public class ScrollSpritesInfo {
         public Sprite sprite;
         public string path;
@@ -154,12 +157,19 @@ public class VideoLobbyCtr : MonoBehaviour {
         if (canvasCtr.isMenuOn)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-                JoyStickMoveLeft();
-
+                if (!doingOnce)
+                {
+                    StartCoroutine(resetdoingOnce());
+                    JoyStickMoveLeft();
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow)) {
-                JoyStickMoveRight();
+                if (!doingOnce)
+                {
+                    StartCoroutine(resetdoingOnce());
+                    JoyStickMoveRight();
+                }
 
             }
 
@@ -167,6 +177,8 @@ public class VideoLobbyCtr : MonoBehaviour {
             //    PlayVideo();
             //}
         }
+
+
     }
 
     public IEnumerator Initialization() {
@@ -418,13 +430,11 @@ public class VideoLobbyCtr : MonoBehaviour {
         return null;
     }
 
-    //float Mapping(float value, float inputMin, float inputMax, float outputMin, float outputMax)
-    //{
-
-    //    float outVal = ((value - inputMin) / (inputMax - inputMin) * (outputMax - outputMin) + outputMin);
-
-    //    return outVal;
-    //}
-
+    IEnumerator resetdoingOnce()
+    {
+        doingOnce = true;
+        yield return new WaitForSeconds(.5f);
+        doingOnce = false;
+    }
 
 }

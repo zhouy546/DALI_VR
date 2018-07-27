@@ -12,6 +12,8 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
     public GameObject console;
     public GameObject Menu;
     bool isConsoleOn;
+
+    private bool doingOnce;
    public bool isMenuOn;
 
     NImage nImage;
@@ -122,25 +124,38 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {
-            isMenuOn = !isMenuOn;
-            menuCtr.InteractionToggle(isMenuOn);
 
-            if (isMenuOn)
-            {
-                menuCtr.ShowAll();
-                //  Menu.GetComponent<NImage>().ShowAll();
-                PostProcessingCtr.instance.Blur();
+            if (!doingOnce) {
+                StartCoroutine(resetdoingOnce());
+                isMenuOn = !isMenuOn;
+                menuCtr.InteractionToggle(isMenuOn);
 
-                videoLobbyCtr.LookingForCurrentPlay();
+                if (isMenuOn)
+                {
+                    menuCtr.ShowAll();
+                    //  Menu.GetComponent<NImage>().ShowAll();
+                    PostProcessingCtr.instance.Blur();
+
+                    videoLobbyCtr.LookingForCurrentPlay();
+                }
+                else
+                {
+                    videoLobbyCtr.PlayVideo();
+                    //Menu.GetComponent<NImage>().HideAll();
+                    menuCtr.HideAll();
+                    PostProcessingCtr.instance.Focus();
+                }
             }
-            else {
-                videoLobbyCtr.PlayVideo();
-                //Menu.GetComponent<NImage>().HideAll();
-                menuCtr.HideAll();
-                PostProcessingCtr.instance.Focus();
-            }
+
+
         }
 
 
+    }
+
+    IEnumerator resetdoingOnce() {
+        doingOnce = true;
+        yield return new WaitForSeconds(1f);
+        doingOnce = false;
     }
 }

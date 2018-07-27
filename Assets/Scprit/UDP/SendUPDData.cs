@@ -68,15 +68,27 @@ public class SendUPDData : MonoBehaviour {
     string CreateMessage() {
         string splitChar = " ";
 
-        string x = UtilityFunction.Mapping(ValueSheet.CamRotation.x, -30, 30, -1, 1).ToString();
+        string x = UtilityFunction.Mapping(ValueSheet.CamRotation.x, -ValueSheet.Cam_X_RotMaxium, ValueSheet.Cam_X_RotMaxium, -1, 1).ToString("0.000");
 
-        string y = UtilityFunction.Mapping(ValueSheet.CamRotation.y, -30, 30, -1, 1).ToString();
+        string y = UtilityFunction.Mapping(ValueSheet.CamRotation.y, -ValueSheet.Cam_Y_RotMaxium, ValueSheet.Cam_Y_RotMaxium, -1, 1).ToString("0.000");
 
-        string z = UtilityFunction.Mapping(ValueSheet.CamRotation.z, -5, 5, -1, 1).ToString();
+        string z = UtilityFunction.Mapping(ValueSheet.CamRotation.z, -ValueSheet.Cam_Z_RotMaxium, ValueSheet.Cam_Z_RotMaxium, -1, 1).ToString("0.000");
 
         string str = x+ splitChar+y+ splitChar+z;
 
             return str;
+
+    }
+
+    private void OnGUI()
+    {
+        GUIStyle bb = new GUIStyle();
+        bb.normal.background = null;    //这是设置背景填充的
+        bb.normal.textColor = new Color(1.0f, 0.5f, 0.0f);   //设置字体颜色的
+        bb.fontSize = 40;       //当然，这是字体大小
+
+        //居中显示FPS
+        GUI.Label(new Rect((Screen.width / 2) - 40, 0, 200, 200), "udp message: " + _sSend, bb);
 
     }
 }

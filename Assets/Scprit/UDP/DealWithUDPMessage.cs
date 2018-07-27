@@ -76,15 +76,5 @@ public class DealWithUDPMessage : MonoBehaviour {
 
        // Debug.Log("数据：" + dataTest);  
     }
-    private void OnGUI()
-    {
-        GUIStyle bb = new GUIStyle();
-        bb.normal.background = null;    //这是设置背景填充的
-        bb.normal.textColor = new Color(1.0f, 0.5f, 0.0f);   //设置字体颜色的
-        bb.fontSize = 40;       //当然，这是字体大小
 
-        //居中显示FPS
-        GUI.Label(new Rect((Screen.width / 2) - 40, 0, 200, 200), "udp message: " + dataTest, bb);
-
-    }
 }

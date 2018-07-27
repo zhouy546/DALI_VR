@@ -29,7 +29,6 @@ public class VideoFrameClickEvent : MonoBehaviour {
 
     public void PlayVideo() {
         meshVideo.SetVideoPath(path);
-        Debug.Log("video played");
         meshVideo.LoadVideo(meshVideo.path, true);
     }
 }

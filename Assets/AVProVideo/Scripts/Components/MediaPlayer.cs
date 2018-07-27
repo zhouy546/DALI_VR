@@ -137,7 +137,7 @@ namespace RenderHeads.Media.AVProVideo
 		[SerializeField]
 		private FileFormat m_forceFileFormat = FileFormat.Unknown;
 
-		private IMediaControl m_Control;
+		public IMediaControl m_Control;
 		private IMediaProducer m_Texture;
 		private IMediaInfo m_Info;
 		private IMediaPlayer m_Player;

@@ -4,11 +4,18 @@ using UnityEngine;
 
 public static class ValueSheet   {
 
+    public static float Cam_X_RotMaxium=30F;
+
+    public static float Cam_Y_RotMaxium=15F;
+
+    public static float Cam_Z_RotMaxium=10F;
+
     public static bool  EnterTrigger;
 
     public static bool ExitTrigger;
 
     //public static bool EnbaleMouseCtr = false;
+    public static float playBackRate = 1;
 
     public static float EaseingValue = 0.013f;
 
