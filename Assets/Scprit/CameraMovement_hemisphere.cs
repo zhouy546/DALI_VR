@@ -23,7 +23,7 @@ public class CameraMovement_hemisphere : MonoBehaviour {
     float ZRot;
     public IEnumerator initialization()
     {
-        Screen.SetResolution(1920, 1200, true);
+        //Screen.SetResolution(1920, 1200, true);
 
         yield return mCamera = this.GetComponent<Camera>();
 
@@ -49,7 +49,7 @@ public class CameraMovement_hemisphere : MonoBehaviour {
     }
     private bool onSwitch = true;
     // Update is called once per frame
-    void Update() {
+    void /*Fixed*/Update() {
 
         CameraRot();
 
@@ -110,13 +110,13 @@ public class CameraMovement_hemisphere : MonoBehaviour {
 
         float cameraY = cameraRotation.y;
 
+        //Debug.Log(cameraZ.ToString());
 
+       float  z = UtilityFunction.Mapping(currentZAxis, -1.5f, 1.5f,ValueSheet.Cam_Z_RotMinium, ValueSheet.Cam_Z_RotMaxium);
 
-       float  z = UtilityFunction.Mapping(currentZAxis, -1.5f, 1.5f, -ValueSheet.Cam_Z_RotMaxium, ValueSheet.Cam_Z_RotMaxium);
+       float  x = UtilityFunction.Mapping(currentXAxis, -1.5f, 1.5f, ValueSheet.Cam_X_RotMinium, ValueSheet.Cam_X_RotMaxium);
 
-       float  x = UtilityFunction.Mapping(currentXAxis, -1.5f, 1.5f, -ValueSheet.Cam_X_RotMaxium, ValueSheet.Cam_X_RotMaxium);
-
-       float  y = UtilityFunction.Mapping(z, -ValueSheet.Cam_Z_RotMaxium, ValueSheet.Cam_Z_RotMaxium, ValueSheet.Cam_Y_RotMaxium, -ValueSheet.Cam_Y_RotMaxium);
+       float  y = UtilityFunction.Mapping(z, ValueSheet.Cam_Z_RotMinium, ValueSheet.Cam_Z_RotMaxium, ValueSheet.Cam_Y_RotMaxium, ValueSheet.Cam_Y_RotMinium);
 
 
 

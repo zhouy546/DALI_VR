@@ -340,12 +340,13 @@ namespace RenderHeads.Media.AVProVideo
 		private OptionsWebGL _optionsWebGL = new OptionsWebGL();
         [SerializeField]
         private OptionsPS4 _optionsPS4 = new OptionsPS4();
+        internal float mediaPlayer;
 
-		/// <summary>
-		/// Properties
-		/// </summary>
+        /// <summary>
+        /// Properties
+        /// </summary>
 
-		public IMediaInfo Info
+        public IMediaInfo Info
 		{
 			get { return m_Info; }
 		}

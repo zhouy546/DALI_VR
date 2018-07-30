@@ -107,7 +107,7 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
 
                 menuCtr.ShowAll();
 
-                PostProcessingCtr.instance.Blur();
+             //   PostProcessingCtr.instance.Blur();
 
                 videoLobbyCtr.LookingForCurrentPlay();
             }
@@ -126,15 +126,15 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
         if (Input.GetKeyDown(KeyCode.Space)) {
 
             if (!doingOnce) {
-                StartCoroutine(resetdoingOnce());
+               StartCoroutine(resetdoingOnce());
                 isMenuOn = !isMenuOn;
                 menuCtr.InteractionToggle(isMenuOn);
 
                 if (isMenuOn)
                 {
                     menuCtr.ShowAll();
-                    //  Menu.GetComponent<NImage>().ShowAll();
-                    PostProcessingCtr.instance.Blur();
+                    // Menu.GetComponent<NImage>().ShowAll();
+                  PostProcessingCtr.instance.Blur();
 
                     videoLobbyCtr.LookingForCurrentPlay();
                 }
@@ -143,7 +143,7 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
                     videoLobbyCtr.PlayVideo();
                     //Menu.GetComponent<NImage>().HideAll();
                     menuCtr.HideAll();
-                    PostProcessingCtr.instance.Focus();
+                   PostProcessingCtr.instance.Focus();
                 }
             }
 

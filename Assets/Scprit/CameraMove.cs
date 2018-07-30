@@ -13,7 +13,7 @@ public class CameraMove : MonoBehaviour {
     public float buffer;
 
     void initialization() {
-        Screen.SetResolution(1920, 1200, true);
+      //  Screen.SetResolution(1920, 1200, true);
 
         mCamera = this.GetComponent<Camera>();
 

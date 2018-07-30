@@ -57,7 +57,7 @@ public class VideoLobbyCtr : MonoBehaviour {
 
     public  CanvasCtr canvasCtr;
 
-    private VideoFrameClickEvent currentSelected;
+    public VideoFrameClickEvent currentSelected;
 
     private int currentVideoNum;
 

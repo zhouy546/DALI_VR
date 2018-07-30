@@ -62,10 +62,10 @@ namespace RenderHeads.Media.AVProVideo
 
 	public interface IMediaControl
 	{
-		/// <summary>
-		/// Be careful using this method directly.  It is best to instead use the OpenVideoFromFile() method in the MediaPlayer component as this will set up the events correctly and also perform other checks
-		/// </summary>
-		bool	OpenVideoFromFile(string path, long offset, string httpHeaderJson, uint sourceSamplerate = 0, uint sourceChannels = 0, int forceFileFormat = 0);
+        /// <summary>
+        /// Be careful using this method directly.  It is best to instead use the OpenVideoFromFile() method in the MediaPlayer component as this will set up the events correctly and also perform other checks
+        /// </summary>
+        bool	OpenVideoFromFile(string path, long offset, string httpHeaderJson, uint sourceSamplerate = 0, uint sourceChannels = 0, int forceFileFormat = 0);
 		bool	OpenVideoFromBuffer(byte[] buffer);
 		bool	StartOpenVideoFromBuffer(ulong length);
 		bool	AddChunkToVideoBuffer(byte[] chunk, ulong offset, ulong length);

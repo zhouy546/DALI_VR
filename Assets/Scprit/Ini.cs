@@ -14,14 +14,20 @@ public class Ini : MonoBehaviour {
     private MeshVideo meshVideo;
 
     private CanvasCtr canvasCtr;
+
+    private MapAnimation mapAnimation;
     // Use this for initialization
-    void Start () {
+    void Awake () {
         StartCoroutine(initialization());
 
 	}
 	
 
    public IEnumerator initialization() {
+        Cursor.visible = false;
+
+        Screen.SetResolution(1920, 1200, false);
+
         readJson = FindObjectOfType<ReadJson>();
 
         cameraMovement_Hemisphere = FindObjectOfType<CameraMovement_hemisphere>();
@@ -31,6 +37,8 @@ public class Ini : MonoBehaviour {
         getUDPMessage = FindObjectOfType<GetUDPMessage>();
 
         meshVideo = FindObjectOfType<MeshVideo>();
+
+        mapAnimation = FindObjectOfType<MapAnimation>();
 
         canvasCtr = FindObjectOfType<CanvasCtr>();
 
@@ -45,5 +53,8 @@ public class Ini : MonoBehaviour {
         sendUPDData.initialization();
 
         canvasCtr.initialization();
+
+        mapAnimation.initialization();
+
     }
 }

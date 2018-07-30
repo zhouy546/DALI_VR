@@ -1,56 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.PostProcessing;
 
 public class PostProcessingCtr : MonoBehaviour {
-    public static   PostProcessingCtr instance;
-    public PostProcessVolume postProcessVolume;
-    DepthOfField depthOfField; 
+    public static PostProcessingCtr instance;
+    public PostProcessingBehaviour postProcessVolume;
+    public DepthOfFieldModel depthOfField;
 
     public void Awake()
     {
-        postProcessVolume = this.GetComponent<PostProcessVolume>();
-        depthOfField = postProcessVolume.profile.GetSetting<DepthOfField>();
-        if (instance == null) {
+        postProcessVolume = this.GetComponent<PostProcessingBehaviour>();
+        depthOfField = postProcessVolume.profile.depthOfField;
+        if (instance == null)
+        {
             instance = this;
         }
     }
 
-    public void Blur() {
+    public void Blur()
+    {
         enableBlur();
-        changeBlurAmount(1, 300, 1, LeanTweenType.easeInOutSine);
+        changeBlurAmount(10, 0, 1, LeanTweenType.easeInOutSine);
     }
 
     public void Focus()
     {
         disableBlure();
-        changeBlurAmount(300, 1, 1, LeanTweenType.easeInOutSine);
+        changeBlurAmount(0, 10, 1, LeanTweenType.easeInOutSine);
 
     }
 
-    public void changeBlurAmount(float from, float to, float time, LeanTweenType leanTweenType = LeanTweenType.notUsed) {
+    public void changeBlurAmount(float from, float to, float time, LeanTweenType leanTweenType = LeanTweenType.notUsed)
+    {
         LeanTween.value(from, to, time).setOnUpdate(delegate (float value)
         {
-            depthOfField.focalLength.value = value;
+            DepthOfFieldModel.Settings Newsettings = depthOfField.settings;
+            Newsettings.focusDistance = value;
+
+            depthOfField.settings = Newsettings;
+
         }).setEase(leanTweenType);
     }
 
-    private  void enableBlur() {
-        depthOfField.active = true;
+    private void enableBlur()
+    {
+        depthOfField.enabled = true;
     }
 
-    private void disableBlure() {
-        depthOfField.active = false;
+    private void disableBlure()
+    {
+        depthOfField.enabled = false;
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

@@ -72,6 +72,10 @@ public class ReadJson : MonoBehaviour {
         getCameraEaseValue();
 
         getvideoPatht();
+
+        GetCamMaxiumAngle();
+
+        GetCamMiniumAngle();
     }
 
     void getvideoPatht()
@@ -108,6 +112,23 @@ public class ReadJson : MonoBehaviour {
         ValueSheet.Cam_Y_RotMaxium = float.Parse(angles[1]);
 
         ValueSheet.Cam_Z_RotMaxium = float.Parse(angles[2]);
+
+    }
+
+    void GetCamMiniumAngle()
+    {
+        List<string> angles = new List<string>();
+
+        for (int i = 0; i < itemDate["config"]["CameraMinRot"].Count; i++)
+        {
+            angles.Add(itemDate["config"]["CameraMinRot"][i].ToString());
+        }
+
+        ValueSheet.Cam_X_RotMinium = float.Parse(angles[0]);
+
+        ValueSheet.Cam_Y_RotMinium = float.Parse(angles[1]);
+
+        ValueSheet.Cam_Z_RotMinium = float.Parse(angles[2]);
 
     }
 

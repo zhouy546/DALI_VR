@@ -11,7 +11,7 @@ using RenderHeads.Media.AVProVideo;
 public class VideoBase : MonoBehaviour {
     protected NImage nImage;
 
-    protected MediaPlayer mediaPlayer;
+    public MediaPlayer mediaPlayer;
 
     public float currentTime;
 

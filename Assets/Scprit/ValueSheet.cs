@@ -10,6 +10,12 @@ public static class ValueSheet   {
 
     public static float Cam_Z_RotMaxium=10F;
 
+    public static float Cam_X_RotMinium = -30F;
+
+    public static float Cam_Y_RotMinium = -15F;
+
+    public static float Cam_Z_RotMinium = -10F;
+
     public static bool  EnterTrigger;
 
     public static bool ExitTrigger;

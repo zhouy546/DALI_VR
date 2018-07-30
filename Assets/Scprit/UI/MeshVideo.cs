@@ -11,33 +11,33 @@ public class MeshVideo : VideoBase {
     }
 
     // Update is called once per frame
-    float tempSpeedTurbo1Axis, tempSpeedTurbo2Axis, tempSpeedTurbo3Axis;
+    //float tempSpeedTurbo1Axis, tempSpeedTurbo2Axis, tempSpeedTurbo3Axis;
     void Update () {
 
-        float turbo1 = UtilityFunction.Mapping(Input.GetAxis("SpeedTurbo1"), -1f, 1f, .5f, 0f);
-        float turbo2 = UtilityFunction.Mapping(Input.GetAxis("SpeedTurbo2"), -1f, 1f, .5f, 0f);
-        float turbo3 = UtilityFunction.Mapping(Input.GetAxis("SpeedTurbo3"), -1f, 1f, .5f, 0f);
+        //float turbo1 = UtilityFunction.Mapping(Input.GetAxis("SpeedTurbo1"), -1f, 1f, .5f, 0f);
+        //float turbo2 = UtilityFunction.Mapping(Input.GetAxis("SpeedTurbo2"), -1f, 1f, .5f, 0f);
+        //float turbo3 = UtilityFunction.Mapping(Input.GetAxis("SpeedTurbo3"), -1f, 1f, .5f, 0f);
 
-        // Debug.Log(turbo2);
-        if (mediaPlayer != null)
-        {
+        //// Debug.Log(turbo2);
+        //if (mediaPlayer != null)
+        //{
 
-            if (tempSpeedTurbo1Axis != turbo1 || tempSpeedTurbo2Axis != turbo2 || tempSpeedTurbo3Axis != turbo3)
-            {
+        //    if (tempSpeedTurbo1Axis != turbo1 || tempSpeedTurbo2Axis != turbo2 || tempSpeedTurbo3Axis != turbo3)
+        //    {
 
-                float temp = ValueSheet.playBackRate + turbo1 + turbo2 + turbo3;
+        //        float temp = ValueSheet.playBackRate + turbo1 + turbo2 + turbo3;
 
-                mediaPlayer.m_Control.SetPlaybackRate(temp);
-                mediaPlayer.m_PlaybackRate = temp;
-                Debug.Log(mediaPlayer.m_PlaybackRate);
-            }
-        }
+        //        mediaPlayer.m_Control.SetPlaybackRate(temp);
+        //        mediaPlayer.m_PlaybackRate = temp;
+        //        Debug.Log(mediaPlayer.m_PlaybackRate);
+        //    }
+        //}
 
-        tempSpeedTurbo1Axis = turbo1;
+        //tempSpeedTurbo1Axis = turbo1;
 
-        tempSpeedTurbo2Axis = turbo2;
+        //tempSpeedTurbo2Axis = turbo2;
 
-        tempSpeedTurbo3Axis = turbo3;
+        //tempSpeedTurbo3Axis = turbo3;
 
 
     }
