@@ -2951,7 +2951,7 @@ MonoBehaviour:
   m_VideoLocation: 2
   m_VideoPath: Video/02.mp4
   m_AutoOpen: 1
-  m_AutoStart: 1
+  m_AutoStart: 0
   m_Loop: 1
   m_Volume: 1
   m_Balance: 0

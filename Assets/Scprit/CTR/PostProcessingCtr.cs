@@ -12,6 +12,8 @@ public class PostProcessingCtr : MonoBehaviour {
     {
         postProcessVolume = this.GetComponent<PostProcessingBehaviour>();
         depthOfField = postProcessVolume.profile.depthOfField;
+
+        Focus();
         if (instance == null)
         {
             instance = this;

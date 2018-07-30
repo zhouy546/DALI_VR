@@ -13,7 +13,19 @@ public class MeshVideo : VideoBase {
     // Update is called once per frame
     //float tempSpeedTurbo1Axis, tempSpeedTurbo2Axis, tempSpeedTurbo3Axis;
     void Update () {
+        if (mediaPlayer != null) {
 
+            if (mediaPlayer.m_Control.IsFinished()) {
+
+                mediaPlayer.Play();
+
+                if (!CanvasCtr.instance.isMenuOn) {
+
+                    CanvasCtr.instance.showMenu();
+
+                }
+                                      }
+        }
         //float turbo1 = UtilityFunction.Mapping(Input.GetAxis("SpeedTurbo1"), -1f, 1f, .5f, 0f);
         //float turbo2 = UtilityFunction.Mapping(Input.GetAxis("SpeedTurbo2"), -1f, 1f, .5f, 0f);
         //float turbo3 = UtilityFunction.Mapping(Input.GetAxis("SpeedTurbo3"), -1f, 1f, .5f, 0f);
