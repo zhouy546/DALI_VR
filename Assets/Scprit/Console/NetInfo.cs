@@ -11,7 +11,12 @@ public class NetInfo : MonoBehaviour {
 
     public void OnEnable()
     {
-        text.text = "Port :" + getPort() + "\n" + "IP :" + getAddress();
+        text.text = "MyPort: " + getPort() + "\n" + "IP: " + getAddress()+"\n"+"Target Port: "+ getTargetPort();
+    }
+
+    public string getTargetPort() {
+        return ValueSheet.m_TargetPort.ToString();
+
     }
 
     public string getPort() {

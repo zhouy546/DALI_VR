@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ResetCtr : MonoBehaviour {
-    GetUDPMessage getUDPMessage;
+    //GetUDPMessage getUDPMessage;
 
     Ini ini;
     // Use this for initialization
     void Start () {
-        getUDPMessage = FindObjectOfType<GetUDPMessage>();
+      //  getUDPMessage = FindObjectOfType<GetUDPMessage>();
 
         ini = FindObjectOfType<Ini>();
 
@@ -16,7 +16,7 @@ public class ResetCtr : MonoBehaviour {
 
     public void ResetAll()
     {
-        getUDPMessage.StopUdp();
+   //     getUDPMessage.StopUdp();
 
         StartCoroutine(ini.initialization());
     }

@@ -19,7 +19,6 @@ public class CameraMovement_hemisphere : MonoBehaviour {
 
     public Transform CamX;
 
-
     float ZRot;
     public IEnumerator initialization()
     {
@@ -50,8 +49,14 @@ public class CameraMovement_hemisphere : MonoBehaviour {
     private bool onSwitch = true;
     // Update is called once per frame
     void /*Fixed*/Update() {
+        if (CanvasCtr.instance!= null) {
+            if (!CanvasCtr.instance.isMenuOn)
+            {
+                CameraRot();
+            }
+        }
 
-        CameraRot();
+
 
     }
 

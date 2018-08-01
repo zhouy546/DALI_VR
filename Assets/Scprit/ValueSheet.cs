@@ -33,6 +33,8 @@ public static class ValueSheet   {
 
     [Tooltip("接受端口号")] public static int m_ReceivePort = 29010;
 
+    public static int m_TargetPort = 10000;
+
     public static string[] videoPath;
 
 }

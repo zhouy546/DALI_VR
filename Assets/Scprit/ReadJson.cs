@@ -165,6 +165,8 @@ public class ReadJson : MonoBehaviour {
      string   port = itemDate["config"]["Port"].ToString();//get port;
         ValueSheet.m_ReceivePort = int.Parse(port);
 
+        string TargetPort = itemDate["config"]["TargetPort"].ToString();
+        ValueSheet.m_TargetPort = int.Parse(TargetPort);
     }
 
     void getIP() {

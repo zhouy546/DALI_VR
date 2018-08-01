@@ -153,25 +153,61 @@ public class VideoLobbyCtr : MonoBehaviour {
     }
 
     // Update is called once per frame
+    float tempzAxis;
+    float currentZAxis;
+    float RotCoolDownTime;
     void Update () {
         if (canvasCtr.isMenuOn)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+
+            float zAxis = -Input.GetAxis("Mouse X");
+            if (tempzAxis == 0 && zAxis == 0)
+            {
+                currentZAxis = 0;
+            }
+            else if (zAxis == 0 && tempzAxis != 0)
+            {
+                currentZAxis = Mathf.Clamp(tempzAxis, -1.5f, 1.5f);
+            }
+            else if (zAxis != 0 && tempzAxis != 0)
+            {
+                currentZAxis = Mathf.Clamp(zAxis, -1.5f, 1.5f);
+            }
+
+            if (zAxis < -0.5)
+            {
                 if (!doingOnce)
                 {
                     StartCoroutine(resetdoingOnce());
                     JoyStickMoveLeft();
                 }
             }
-
-            if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            else if (zAxis > 0.5) {
                 if (!doingOnce)
                 {
                     StartCoroutine(resetdoingOnce());
                     JoyStickMoveRight();
                 }
-
             }
+
+            tempzAxis = zAxis;
+
+            //if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            //    if (!doingOnce)
+            //    {
+            //        StartCoroutine(resetdoingOnce());
+            //        JoyStickMoveLeft();
+            //    }
+            //}
+
+            //if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            //    if (!doingOnce)
+            //    {
+            //        StartCoroutine(resetdoingOnce());
+            //        JoyStickMoveRight();
+            //    }
+
+            //}
 
             //if (Input.GetKeyDown(KeyCode.A)) {
             //    PlayVideo();
@@ -433,7 +469,7 @@ public class VideoLobbyCtr : MonoBehaviour {
     IEnumerator resetdoingOnce()
     {
         doingOnce = true;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(1f);
         doingOnce = false;
     }
 
