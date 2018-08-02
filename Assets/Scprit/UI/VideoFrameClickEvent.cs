@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 [RequireComponent(typeof(Canvas))]
 public class VideoFrameClickEvent : MonoBehaviour {
+    public int id;
+
    public string path;
 
     MeshVideo meshVideo;

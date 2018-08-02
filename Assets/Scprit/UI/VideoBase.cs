@@ -9,6 +9,10 @@ using RenderHeads.Media.AVProVideo;
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(NImage))]
 public class VideoBase : MonoBehaviour {
+    public delegate void VideoPlayDelegate();
+
+    public  event VideoPlayDelegate VideoPlayEvent;
+
     protected NImage nImage;
 
     public MediaPlayer mediaPlayer;
@@ -31,9 +35,12 @@ public class VideoBase : MonoBehaviour {
 
         nImage = this.GetComponent<NImage>();
 
-       mediaPlayer = this.GetComponent<MediaPlayer>();
+        mediaPlayer = this.GetComponent<MediaPlayer>();
 
-        LoadVideo(path);
+        SetVideoPath(ValueSheet.videoPath[0]);
+
+
+
     }
 
     public void SetVideoPath(string str) {
@@ -96,6 +103,13 @@ public class VideoBase : MonoBehaviour {
 
 
     public void LoadVideo(string _path, bool isAutoPlay = true) {
+
+        if (VideoPlayEvent != null)
+        {
+            Debug.Log("play video event");
+            VideoPlayEvent();
+        }
+
         path = _path;
         mediaPlayer.OpenVideoFromFile(MediaPlayer.FileLocation.RelativeToStreamingAssetsFolder, _path, isAutoPlay);
     }

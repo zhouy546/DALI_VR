@@ -38,7 +38,7 @@ public class ImageBase : IRect {
 
 
     public void ChangeColor(Color color, float time, LeanTweenType leanTweenType = LeanTweenType.notUsed, Action onColorChangeComplete = null) {
-        PervioudColor = image.color;
+        PervioudColor = image.color;                                                                                                                     
         if (ColorLTDescr != null)
         {
             CancelColorLeanTween();
@@ -57,6 +57,7 @@ public class ImageBase : IRect {
           float g = Mapping(value, 0, 1, currentColor.g, color.g);
           float b = Mapping(value, 0, 1, currentColor.b, color.b);
           float a = Mapping(value, 0, 1, currentColor.a, color.a);
+
           currentColor = image.color = new Color(r, g, b, a);
 
         }).setOnComplete(delegate ()

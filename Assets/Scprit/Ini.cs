@@ -5,8 +5,13 @@ using System.Linq;
 using UnityEngine;
 
 public class Ini : MonoBehaviour {
-    
-    Dictionary<int, List<Sprite>> keyValuePairsOfDescriptionImage = new Dictionary<int, List<Sprite>>();
+    public static Ini instance;
+
+   Dictionary<int, List<Sprite>> keyValuePairsOfDescriptionImage = new Dictionary<int, List<Sprite>>();
+
+    Dictionary<int, Sprite> keyValuePairsOfMenuImage = new Dictionary<int, Sprite>();
+
+    Dictionary<int, Sprite> keyValuePairsOfTitleImage = new Dictionary<int, Sprite>();
 
     List<Sprite> tempSprite = new List<Sprite>();
 
@@ -33,6 +38,11 @@ public class Ini : MonoBehaviour {
 	}
 
    public IEnumerator initialization() {
+        if(instance == null){
+
+            instance = this;
+        }
+
         Cursor.visible = false;
 
         Screen.SetResolution(1920, 1200, false);
@@ -53,31 +63,61 @@ public class Ini : MonoBehaviour {
 
         yield return StartCoroutine(readJson.initialization());
 
-        yield return StartCoroutine(cameraMovement_Hemisphere.initialization());
+        yield return StartCoroutine(LoadImage());
 
-        meshVideo.initialization();
+        CreateInfoObject();
+
+        yield return StartCoroutine(cameraMovement_Hemisphere.initialization());
 
         getUDPMessage.InitializationUdp();
 
         sendUPDData.initialization();
 
-        canvasCtr.initialization();
-
         mapAnimation.initialization();
 
-        yield return StartCoroutine(LoadImage());
+        meshVideo.initialization();
 
-        CreateInfoObject();
+        canvasCtr.initialization();//播放视频事件会会在其中被添加，之后在开始视频
+
+        MeshVideo.instance.LoadVideo(MeshVideo.instance.path);
 
     }
 
 
     IEnumerator LoadImage() {
 
-        yield return StartCoroutine(GetSpriteListFromStreamAsset("/UITexture/TitleTextures/", "jpg",title));
+        string TitleTexturesPath = "/UITexture/TitleTextures/";
+
+        string MenuTexturePath = "/UITexture/Lobby/ScrollSeq/";
+
+        yield return StartCoroutine(setKeyValue(TitleTexturesPath, keyValuePairsOfTitleImage, "jpg"));
+
+        yield return StartCoroutine(setKeyValue(MenuTexturePath, keyValuePairsOfMenuImage, "jpg"));
+
+        yield return StartCoroutine(SetDescriptionImageDic());
+
+    }
+
+
+    IEnumerator setKeyValue(string _path,Dictionary<int,Sprite> dic,string format) {
+        for (int i = 0; i < ValueSheet.videoPath.Length; i++)
+        {           
+            yield return StartCoroutine(GetSpriteListFromStreamAsset(_path, format, tempSprite));
+
+            Sprite[] Sprite = new Sprite[tempSprite.Count];
+
+            tempSprite.CopyTo(Sprite);
+
+            dic.Add(i, Sprite[i]);
+
+            tempSprite.Clear();
+        }
+    }
+
+    IEnumerator SetDescriptionImageDic() {
 
         for (int i = 0; i < ValueSheet.videoPath.Length; i++)
-        {    
+        {
 
             string path = "/UITexture/DescriptionTextures/" + i.ToString() + "/";
 
@@ -91,7 +131,6 @@ public class Ini : MonoBehaviour {
 
             tempSprite.Clear();
         }
-
     }
 
 
@@ -100,11 +139,11 @@ public class Ini : MonoBehaviour {
         {
             string videoPath = ValueSheet.videoPath[i];
 
-            Sprite titleSprite = title[i];
+            Sprite titleSprite = keyValuePairsOfTitleImage[i];
 
             List<Sprite> DescriptionImage = keyValuePairsOfDescriptionImage[i];
 
-            Sprite MenuImage = canvasCtr.videoLobbyCtr.SpritesListData[i];
+            Sprite MenuImage = keyValuePairsOfMenuImage[i];
     
             infos.Add(new Info(i.ToString(), videoPath, titleSprite, DescriptionImage, MenuImage));
         }

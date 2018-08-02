@@ -37,4 +37,6 @@ public static class ValueSheet   {
 
     public static string[] videoPath;
 
+    public static int CurrentPlayID=0;
+
 }

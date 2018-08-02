@@ -1,42 +1,114 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TitleCtr : MonoBehaviour {
-    List<Sprite> TitleSprites = new List<Sprite>();
+    public NImage LeftImage, RightImage, TitleImage;
 
-    NImage LeftImage;
-    NImage RightImage;
-    NImage TitleImage;
+    public float width {
+        get { return Ini.instance.infos[ValueSheet.CurrentPlayID].TitleSprite.rect.width; }
+    }
 
-    public string path;
+    public float height {
+        get { return Ini.instance.infos[ValueSheet.CurrentPlayID].TitleSprite.rect.height; }
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    private float Startoffset = 100;
+
+    private float MoveDis = 50;
+
+    public float EndOffset {
+        get { return Startoffset - MoveDis; }
+    }
+
+    public Vector3 LeftStartPos
+    {
+        get {
+            float x = -(width / 2 + Startoffset);
+            return new Vector3(x, LeftImage.transform.localPosition.y, LeftImage.transform.localPosition.z);
+        }
+    }
+
+    public Vector3 LeftEndPos
+    {
+        get
+        {
+            float x = -(width / 2 + EndOffset);
+            return new Vector3(x, LeftImage.transform.localPosition.y, LeftImage.transform.localPosition.z);
+        }
+    }
+
+    public Vector3 RightStartPos
+    {
+        get
+        {
+            float x = (width / 2 + Startoffset);
+            return new Vector3(x, RightImage.transform.localPosition.y, RightImage.transform.localPosition.z);
+        }
+    }
+
+    public Vector3 RightEndPos
+    {
+        get
+        {
+            float x = (width / 2 + EndOffset);
+            return new Vector3(x, RightImage.transform.localPosition.y, RightImage.transform.localPosition.z);
+        }
+    }
+
+
+    public void OnEnable()
+    {
+        if (MeshVideo.instance != null) {
+            MeshVideo.instance.VideoPlayEvent += ShowTitle;
+        }
+    }
+
+    public void OnDisable()
+    {
+        MeshVideo.instance.VideoPlayEvent -= ShowTitle;
+    }
 
     public void initialization() {
-        TitleSprites = getTitleImageList();
+        MeshVideo.instance.VideoPlayEvent += ShowTitle;
     }
 
-    public List<Sprite> getTitleImageList() {
-        List<Sprite> sprites = new List<Sprite>();
+    public void ShowTitle() {
+        Debug.Log("Show Me");
+        TitleImage.image.sprite = Ini.instance.infos[ValueSheet.CurrentPlayID].TitleSprite;
+        TitleImage.image.rectTransform.sizeDelta = new Vector2(width, height);
+        ShowBrackets();
 
-        return sprites;
+        LeftImage.ShowAll();
+        RightImage.ShowAll();
+        TitleImage.ShowAll();
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
 
-    void ShowTitle() {
-
+    void ShowBrackets() {
+        showLeftBracket();
+        showRightBracket();
     }
 
-    void HideTitle() {
+    void showLeftBracket() {
+        LeftImage.SetLocation(LeftStartPos, 0);
 
+        LeftImage.SetLocation(LeftEndPos, 1);
     }
+
+    void showRightBracket()
+    {
+
+        RightImage.SetLocation(RightStartPos, 0);
+
+        RightImage.SetLocation(RightEndPos, 1);
+    }
+
+
+    public void HideAll() {
+        LeftImage.HideAll();
+        RightImage.HideAll();
+        TitleImage.HideAll();
+    }
+
 }

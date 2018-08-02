@@ -9,6 +9,8 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
 
     public VideoLobbyCtr videoLobbyCtr;
     public MenuCtr menuCtr;
+    public MainUICtr mainUICtr;
+   
     public GameObject console;
     public GameObject Menu;
     bool isConsoleOn;
@@ -18,13 +20,14 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
 
     NImage nImage;
 
-    public void initialization() {
+    public void initialization()     {
         if (instance == null) {
             instance = this;
         } 
 
-        StartCoroutine(videoLobbyCtr.Initialization());
+        videoLobbyCtr.Initialization();
         menuCtr.initialization();
+        mainUICtr.initialization();
 
         menuCtr.InteractionToggle(isMenuOn);
         menuCtr.HideAll();
@@ -142,7 +145,7 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
                 menuCtr.ShowAll();
                 // Menu.GetComponent<NImage>().ShowAll();
                 PostProcessingCtr.instance.Blur();
-
+                mainUICtr.HideAll();
                 videoLobbyCtr.LookingForCurrentPlay();
             }
             else

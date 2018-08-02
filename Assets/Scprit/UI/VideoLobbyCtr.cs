@@ -66,39 +66,12 @@ public class VideoLobbyCtr : MonoBehaviour {
 
     }
 
-    IEnumerator LoadSeq()
-    {
-        List<Texture> texturesList = new List<Texture>();
-        string streamingPath = Application.streamingAssetsPath + "/UITexture/Lobby/ScrollSeq/";
-
-        DirectoryInfo dir = new DirectoryInfo(streamingPath);
-
-        GetAllFiles(dir);
-
-        double startTime = (double)Time.time;
-
-        foreach (string de in jpgName)
+    void LoadSeq()
+    {       
+        for (int i = 0; i < ValueSheet.videoPath.Length; i++)
         {
-            WWW www = new WWW(Application.streamingAssetsPath + "/UITexture/Lobby/ScrollSeq/" + de);
-            yield return www;
-            if (www != null)
-            {
-                Texture texture = www.texture;
-                texture.name = de;
-                texturesList.Add(texture);
-                startTime = (double)Time.time - startTime;
-            }
-            if (www.isDone)
-            {
-                www.Dispose();
-            }
-        }
+            SpritesListData.Add(Ini.instance.infos[i].MenuImage);
 
-        foreach (var texture in texturesList)
-        {
-            Sprite sprite = Sprite.Create(texture as Texture2D, new Rect(0,0,texture.width, texture.height), Vector2.zero);
-            sprite.name = texture.name;
-            SpritesListData.Add(sprite);
         }
 
         int RawLenth = ScrollSpritesList.Count;
@@ -119,39 +92,6 @@ public class VideoLobbyCtr : MonoBehaviour {
                  num++;
         }
     }
-
-    List<string> jpgName = new List<string>();
-
-    public void GetAllFiles(DirectoryInfo dir)
-    {
-        FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();   //初始化一个FileSystemInfo类型的实例
-        foreach (FileSystemInfo i in fileinfo)              //循环遍历fileinfo下的所有内容
-        {
-            if (i is DirectoryInfo)             //当在DirectoryInfo中存在i时
-            {
-                GetAllFiles((DirectoryInfo)i);  //获取i下的所有文件
-            }
-            else
-            {
-                string str = i.FullName;        //记录i的绝对路径
-                string path = Application.streamingAssetsPath + "/UITexture/Lobby/ScrollSeq/";
-                string strType = str.Substring(path.Length);
-                //               Debug.Log(strType);
-                if (strType.Substring(strType.Length - 3).ToLower() == "jpg")
-                {
-                    if (jpgName.Contains(strType))
-                    {
-                    }
-                    else
-                    {
-                        //Debug.Log(strType);
-                        jpgName.Add(strType);
-                    }
-                }
-            }
-        }
-    }
-
     // Update is called once per frame
     float tempzAxis;
     float currentZAxis;
@@ -217,7 +157,7 @@ public class VideoLobbyCtr : MonoBehaviour {
 
     }
 
-    public IEnumerator Initialization() {
+    public void Initialization() {
         if (isAwake) {
             for (int i = 0; i < DisplaySlotNum+2; i++)
             {
@@ -241,7 +181,7 @@ public class VideoLobbyCtr : MonoBehaviour {
             //----------------
             GenerateSlot();
 
-            yield return StartCoroutine(LoadSeq());
+            LoadSeq();
 
 
             int value = VideoFrameNImages.Count / 2;
@@ -302,6 +242,8 @@ public class VideoLobbyCtr : MonoBehaviour {
         }
 
         currentSelected.path = ValueSheet.videoPath[value];
+
+        currentSelected.id = value;
     }
 
 
@@ -323,6 +265,9 @@ public class VideoLobbyCtr : MonoBehaviour {
     }
 
     public void PlayVideo() {
+
+        ValueSheet.CurrentPlayID = currentSelected.id;
+
         currentSelected.PlayVideo();
     }
 
