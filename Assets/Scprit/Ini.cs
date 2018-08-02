@@ -76,7 +76,7 @@ public class Ini : MonoBehaviour {
 
         yield return StartCoroutine(GetSpriteListFromStreamAsset("/UITexture/TitleTextures/", "jpg",title));
 
-        for (int i = 0; i < canvasCtr.videoLobbyCtr.SpritesListData.Count; i++)
+        for (int i = 0; i < ValueSheet.videoPath.Length; i++)
         {    
 
             string path = "/UITexture/DescriptionTextures/" + i.ToString() + "/";
@@ -96,7 +96,7 @@ public class Ini : MonoBehaviour {
 
 
     void CreateInfoObject() {
-        for (int i = 0; i < canvasCtr.videoLobbyCtr.SpritesListData.Count; i++)
+        for (int i = 0; i < ValueSheet.videoPath.Length; i++)
         {
             string videoPath = ValueSheet.videoPath[i];
 
