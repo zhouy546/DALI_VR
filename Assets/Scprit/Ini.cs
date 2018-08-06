@@ -145,7 +145,7 @@ public class Ini : MonoBehaviour {
 
             Sprite MenuImage = keyValuePairsOfMenuImage[i];
     
-            infos.Add(new Info(i.ToString(), videoPath, titleSprite, DescriptionImage, MenuImage));
+            infos.Add(new Info(i.ToString(), videoPath, titleSprite, DescriptionImage, MenuImage,ValueSheet.DescriptionImageTime[i]));
         }
     }
 
@@ -228,11 +228,13 @@ public class Info {
 
    public List<Sprite> DescriptionImage = new List<Sprite>();
 
-    public Sprite MenuImage;
+   public Sprite MenuImage;
+
+    public List<float> DescriptionImageTime = new List<float>();
 
    public Info() { }
 
-  public  Info(string _id, string _VideoPath, Sprite _TitleSprite, List<Sprite> _DescriptionImage, Sprite _MenuImage) {
+  public  Info(string _id, string _VideoPath, Sprite _TitleSprite, List<Sprite> _DescriptionImage, Sprite _MenuImage,List<float> _time) {
         id = _id;
 
         VideoPath = _VideoPath;
@@ -242,5 +244,7 @@ public class Info {
         DescriptionImage = _DescriptionImage;
 
         MenuImage = _MenuImage;
+
+        DescriptionImageTime = _time;
     }
 }

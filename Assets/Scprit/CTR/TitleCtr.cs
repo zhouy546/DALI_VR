@@ -57,20 +57,9 @@ public class TitleCtr : MonoBehaviour {
     }
 
 
-    public void OnEnable()
-    {
-        if (MeshVideo.instance != null) {
-            MeshVideo.instance.VideoPlayEvent += ShowTitle;
-        }
-    }
-
-    public void OnDisable()
-    {
-        MeshVideo.instance.VideoPlayEvent -= ShowTitle;
-    }
 
     public void initialization() {
-        MeshVideo.instance.VideoPlayEvent += ShowTitle;
+;
     }
 
     public void ShowTitle() {

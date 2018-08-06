@@ -96,6 +96,8 @@ public class VideoLobbyCtr : MonoBehaviour {
     float tempzAxis;
     float currentZAxis;
     float RotCoolDownTime;
+
+
     void Update () {
         if (canvasCtr.isMenuOn)
         {

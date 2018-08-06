@@ -10,7 +10,7 @@ public class CanvasCtr : MonoBehaviour,IPointerDownHandler,IPointerEnterHandler,
     public VideoLobbyCtr videoLobbyCtr;
     public MenuCtr menuCtr;
     public MainUICtr mainUICtr;
-   
+
     public GameObject console;
     public GameObject Menu;
     bool isConsoleOn;

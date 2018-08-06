@@ -9,6 +9,7 @@ using System.IO;
 using LitJson;
 
 using UnityEngine.UI;
+using System.Linq;
 
 public class ReadJson : MonoBehaviour {
     public static ReadJson instance;
@@ -76,6 +77,8 @@ public class ReadJson : MonoBehaviour {
         GetCamMaxiumAngle();
 
         GetCamMiniumAngle();
+
+        getDescriotionImageTime();
     }
 
     void getvideoPatht()
@@ -89,6 +92,24 @@ public class ReadJson : MonoBehaviour {
         }
 
         ValueSheet.videoPath = paths.ToArray();
+    }
+    List<float> Temptime = new List<float>();
+    void getDescriotionImageTime() {
+        for (int i = 0; i < itemDate["config"]["DescriotionImageTime"].Count; i++)
+        {
+            for (int j = 0; j < itemDate["config"]["DescriotionImageTime"][i.ToString()].Count; j++)
+            {
+             
+               Temptime.Add(float.Parse(itemDate["config"]["DescriotionImageTime"][i.ToString()][j].ToString()));                    
+            }
+
+            float[] time = new float[Temptime.Count];
+
+            Temptime.CopyTo(time);
+
+            ValueSheet.DescriptionImageTime.Add(i, time.ToList());
+            Temptime.Clear();
+        }
     }
 
     void getCameraEaseValue() {

@@ -8,22 +8,9 @@ public class DescriptionImageCtr : MonoBehaviour {
     void Start () {
 
 	}
-
-    private void OnEnable()
-    {
-        if (MeshVideo.instance != null) {
-            MeshVideo.instance.VideoPlayEvent += ShowDescription;
-        }
-    }
-
-    public void OnDisable()
-    {
-        MeshVideo.instance.VideoPlayEvent -= ShowDescription;
-    }
-
     public  void initialization() {
 
-        MeshVideo.instance.VideoPlayEvent += ShowDescription;
+  
 
     }
 
@@ -45,42 +32,54 @@ public class DescriptionImageCtr : MonoBehaviour {
 
     }
 
-
+    int temp;
     IEnumerator goDescription() {
-
+        temp = 0;
         nImage00.HideAll(0);
         nImage01.HideAll(0);
 
         List<Sprite> tempSprite = Ini.instance.infos[ValueSheet.CurrentPlayID].DescriptionImage;
+        List<float> tempWaitTime = Ini.instance.infos[ValueSheet.CurrentPlayID].DescriptionImageTime;
 
      int length = tempSprite.Count;
        
-        int temp = 0;
+       
         for (int i = 0; i < length; i++)
         {
-            if (length <= 1)
-            {
-                yield return new WaitForSeconds(5);
-                nImage00.image.sprite = tempSprite[i];
-                nImage00.ShowAll(5);
-            }
-            else {
-                //play the sprite list
-                if (temp < tempSprite.Count) {//检查temp++时最后一个不能超出界限
-                    yield return new WaitForSeconds(5);//从JSON过来的一个ARRAY[TEMP]调节出现间隔      
-                    nImage00.image.sprite = tempSprite[temp];
-                    nImage00.ShowAll(5);
-                    nImage01.HideAll(5);
-                    yield return new WaitForSeconds(5);
-                    nImage00.HideAll(5);
-                    temp++;
-                    nImage01.image.sprite = tempSprite[temp];
-                    nImage01.ShowAll(5);
-                    temp++;
-                }
-            }
-          
+            Debug.Log("i =" + i.ToString());
+            yield return StartCoroutine(showDesImage(length, tempWaitTime, tempSprite, i));
+            Debug.Log("goin next");
         }
+
+        temp = 0;
+    }
+
+
+    IEnumerator showDesImage(int length, List<float> tempWaitTime, List<Sprite> tempSprite,int i) {
+        if (length <= 1)
+        {
+            yield return new WaitForSeconds(tempWaitTime[temp]);
+            nImage00.image.sprite = tempSprite[i];
+            nImage00.ShowAll(5);
+        }
+        else
+        {
+            //play the sprite list
+            if (temp < tempSprite.Count)
+            {
+                yield return new WaitForSeconds(tempWaitTime[temp]);//从JSON过来的一个ARRAY[TEMP]调节出现间隔    
+                nImage00.image.sprite = tempSprite[temp];
+                nImage00.ShowAll(5);
+                nImage01.HideAll(5);
+                temp++;
+                yield return new WaitForSeconds(tempWaitTime[temp]);
+                nImage00.HideAll(5);
+                nImage01.image.sprite = tempSprite[temp];
+                nImage01.ShowAll(5);
+                temp++;
+            }
+        }
+
     }
 
 
