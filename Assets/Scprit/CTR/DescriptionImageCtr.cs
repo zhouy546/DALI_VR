@@ -34,6 +34,7 @@ public class DescriptionImageCtr : MonoBehaviour {
 
     int temp;
     IEnumerator goDescription() {
+
         temp = 0;
         nImage00.HideAll(0);
         nImage01.HideAll(0);
@@ -71,12 +72,14 @@ public class DescriptionImageCtr : MonoBehaviour {
                 nImage00.image.sprite = tempSprite[temp];
                 nImage00.ShowAll(5);
                 nImage01.HideAll(5);
-                temp++;
-                yield return new WaitForSeconds(tempWaitTime[temp]);
-                nImage00.HideAll(5);
-                nImage01.image.sprite = tempSprite[temp];
-                nImage01.ShowAll(5);
-                temp++;
+                if (temp+1 < tempSprite.Count) {
+                    temp++;
+                    yield return new WaitForSeconds(tempWaitTime[temp]);
+                    nImage00.HideAll(5);
+                    nImage01.image.sprite = tempSprite[temp];
+                    nImage01.ShowAll(5);
+                    temp++;
+                }
             }
         }
 

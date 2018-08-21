@@ -40,4 +40,8 @@ public static class ValueSheet   {
     public static int CurrentPlayID=0;
 
     public static Dictionary<int, List<float>> DescriptionImageTime = new Dictionary<int, List<float>>();
+
+    public static Dictionary<int,List<Vector3>> DescriptionImageID_PosList = new Dictionary<int, List<Vector3>>();
+
+
 }

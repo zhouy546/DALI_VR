@@ -90,9 +90,9 @@ public class Ini : MonoBehaviour {
 
         string MenuTexturePath = "/UITexture/Lobby/ScrollSeq/";
 
-        yield return StartCoroutine(setKeyValue(TitleTexturesPath, keyValuePairsOfTitleImage, "jpg"));
+        yield return StartCoroutine(setKeyValue(TitleTexturesPath, keyValuePairsOfTitleImage, "png"));
 
-        yield return StartCoroutine(setKeyValue(MenuTexturePath, keyValuePairsOfMenuImage, "jpg"));
+        yield return StartCoroutine(setKeyValue(MenuTexturePath, keyValuePairsOfMenuImage, "png"));
 
         yield return StartCoroutine(SetDescriptionImageDic());
 
@@ -121,7 +121,7 @@ public class Ini : MonoBehaviour {
 
             string path = "/UITexture/DescriptionTextures/" + i.ToString() + "/";
 
-            yield return StartCoroutine(GetSpriteListFromStreamAsset(path, "jpg", tempSprite));
+            yield return StartCoroutine(GetSpriteListFromStreamAsset(path, "png", tempSprite));
 
             Sprite[] Sprite = new Sprite[tempSprite.Count];
 
@@ -143,9 +143,11 @@ public class Ini : MonoBehaviour {
 
             List<Sprite> DescriptionImage = keyValuePairsOfDescriptionImage[i];
 
+            List<Vector3> DescriptionImagePos = ValueSheet.DescriptionImageID_PosList[i];
+
             Sprite MenuImage = keyValuePairsOfMenuImage[i];
     
-            infos.Add(new Info(i.ToString(), videoPath, titleSprite, DescriptionImage, MenuImage,ValueSheet.DescriptionImageTime[i]));
+            infos.Add(new Info(i.ToString(), videoPath, titleSprite, DescriptionImage, DescriptionImagePos, MenuImage,ValueSheet.DescriptionImageTime[i]));
         }
     }
 
@@ -228,14 +230,18 @@ public class Info {
 
    public List<Sprite> DescriptionImage = new List<Sprite>();
 
+    public List<Vector3> DescriptionImagePos = new List<Vector3>();
+
    public Sprite MenuImage;
 
     public List<float> DescriptionImageTime = new List<float>();
 
    public Info() { }
 
-  public  Info(string _id, string _VideoPath, Sprite _TitleSprite, List<Sprite> _DescriptionImage, Sprite _MenuImage,List<float> _time) {
+  public  Info(string _id, string _VideoPath, Sprite _TitleSprite, List<Sprite> _DescriptionImage, List<Vector3> _DescriptionImagePos, Sprite _MenuImage,List<float> _time) {
         id = _id;
+
+        DescriptionImagePos = _DescriptionImagePos;
 
         VideoPath = _VideoPath;
 

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MainUICtr : MonoBehaviour {
    public DescriptionImageCtr descriptionImageCtr;
+    public DescriptionImageSystem descriptionImageSystem;
     public TitleCtr titleCtr;
     public MapCtr mapCtr;
+    public HintCtr hintCtr;
 
     private void OnEnable()
     {
@@ -31,6 +33,8 @@ public class MainUICtr : MonoBehaviour {
         titleCtr.initialization();
         mapCtr.initialization();
         descriptionImageCtr.initialization();
+        hintCtr.initialization();
+
         MeshVideo.instance.VideoPlayEvent += ShowAll;
     }
 
@@ -40,14 +44,18 @@ public class MainUICtr : MonoBehaviour {
 	}
 
     public void HideAll() {
+        hintCtr.HideAll();
         titleCtr.HideAll();
-        descriptionImageCtr.HideAll();
+       // descriptionImageCtr.HideAll();
+        descriptionImageSystem.HideAll();
         mapCtr.HideAll();
     }
 
     public void ShowAll() {
+        hintCtr.ShowAll();
         titleCtr.ShowTitle();
-        descriptionImageCtr.ShowDescription();
+       // descriptionImageCtr.ShowDescription();
+        descriptionImageSystem.ShowDescription();
         mapCtr.ShowAll();
     }
 }

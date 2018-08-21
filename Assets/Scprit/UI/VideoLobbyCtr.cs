@@ -218,7 +218,7 @@ public class VideoLobbyCtr : MonoBehaviour {
 
     private void UpdateUIImage(int value) {
 
-        VideoFrameNImages[0].image.sprite = ScrollSpritesList[0].sprite;
+        VideoFrameNImages[0].image.sprite = ScrollSpritesList[0].sprite;       
 
         VideoFrameNImages[VideoFrameNImages.Count - 1].image.sprite = ScrollSpritesList[VideoFrameNImages.Count - 1].sprite;
 
@@ -226,19 +226,42 @@ public class VideoLobbyCtr : MonoBehaviour {
     }
 
     private void UpdateSelectSlot(int value) {
-
         int num = VideoFrameNImages.Count / 2;
+
+        if (currentSelected != null)
+        {
+            List<VideoFrameClickEvent> videoFrameClickEvents = new List<VideoFrameClickEvent>();
+
+            for (int i = 0; i < VideoFrameNImages.Count; i++)
+            {
+                videoFrameClickEvents.Add(VideoFrameNImages[i].GetComponent<VideoFrameClickEvent>());
+            }
+
+
+            for (int i = 0; i < videoFrameClickEvents.Count; i++)
+            {
+                if (i < num)
+                {
+                    videoFrameClickEvents[i].SetLayer(i);
+                }
+                else
+                {
+                    videoFrameClickEvents[i].SetLayer(num * 2 - i);
+                }
+            }
+        }
+     
 
         currentVideoNum = value;
 
         if (currentSelected != null){
-            DeHeighlight(currentSelected.GetComponent<NImage>());
-            currentSelected.SetLayer(1);
+           // DeHeighlight(currentSelected.GetComponent<NImage>());
+            currentSelected.SetLayer(2);
         }
 
         currentSelected = VideoFrameNImages[num].GetComponent<VideoFrameClickEvent>();
         if (!isAwake) {
-            Heighlight(VideoFrameNImages[num]);
+            //Heighlight(VideoFrameNImages[num]);
             currentSelected.SetLayer(5);
 
         }

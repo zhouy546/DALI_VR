@@ -51,6 +51,7 @@ MonoBehaviour:
   currentColor: {r: 0, g: 0, b: 0, a: 0}
   DefaultColor: {r: 0, g: 0, b: 0, a: 0}
   TargetColor: {r: 1, g: 0, b: 0, a: 1}
+  PervioudColor: {r: 0, g: 0, b: 0, a: 0}
   image: {fileID: 0}
   ChildrenimageBases: []
   clickEvent: {fileID: 114338533140039396}
@@ -92,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdbcfc92abeba0c41b6f8dbb9a1363d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   path: 
 --- !u!222 &222975224154654164
 CanvasRenderer:
@@ -135,5 +137,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 300}
+  m_SizeDelta: {x: 483.5, y: 290.5}
   m_Pivot: {x: 0.5, y: 0.5}

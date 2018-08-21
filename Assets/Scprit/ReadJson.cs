@@ -79,6 +79,8 @@ public class ReadJson : MonoBehaviour {
         GetCamMiniumAngle();
 
         getDescriotionImageTime();
+
+        getDescriotionImageStartPos();
     }
 
     void getvideoPatht()
@@ -110,6 +112,39 @@ public class ReadJson : MonoBehaviour {
             ValueSheet.DescriptionImageTime.Add(i, time.ToList());
             Temptime.Clear();
         }
+    }
+    List<float> tempStartPosfloat = new List<float>();
+    List<Vector3> tempStartPosVector3 = new List<Vector3>();
+    void getDescriotionImageStartPos() {
+        for (int i = 0; i < itemDate["config"]["DescriotionImageStartPos"].Count; i++)
+        {
+            for (int j = 0; j < itemDate["config"]["DescriotionImageStartPos"][i.ToString()].Count; j++) {
+                
+                for (int k = 0; k < itemDate["config"]["DescriotionImageStartPos"][i.ToString()][j.ToString()].Count; k++)
+                {
+                    tempStartPosfloat.Add(float.Parse(itemDate["config"]["DescriotionImageStartPos"][i.ToString()][j.ToString()][k].ToString()));
+                }
+
+                Vector3 pos = new Vector3(tempStartPosfloat[0], tempStartPosfloat[1], 4.54f);
+                tempStartPosVector3.Add(pos);
+                tempStartPosfloat.Clear();
+            }
+
+            Vector3[] thepos = new Vector3[tempStartPosVector3.Count];
+
+            tempStartPosVector3.CopyTo(thepos);
+
+            ValueSheet.DescriptionImageID_PosList.Add(i, thepos.ToList());
+            tempStartPosVector3.Clear();
+        }
+        //for (int i = 0; i < itemDate["config"]["DescriotionImageStartPos"].Count; i++)
+        //{
+        //    for (int j = 0; j < ValueSheet.DescriptionImageID_PosList[i].Count; j++)
+        //    {
+        //        Debug.Log("VIDEO ID : " + i.ToString() + "Image num : " + j.ToString() + "position" + ValueSheet.DescriptionImageID_PosList[i][j].ToString());
+        //    }
+        //}
+
     }
 
     void getCameraEaseValue() {
