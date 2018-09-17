@@ -35,6 +35,8 @@ public static class ValueSheet   {
 
     public static int m_TargetPort = 10000;
 
+    public static string sentIP;
+
     public static string[] videoPath;
 
     public static int CurrentPlayID=0;

@@ -63,7 +63,7 @@ public class ReadJson : MonoBehaviour {
     void GetData() {
 
         getPort();
-
+        getIP();
         //getEnableMouse();
 
         getSplitChar();
@@ -226,7 +226,10 @@ public class ReadJson : MonoBehaviour {
     }
 
     void getIP() {
-      string  ip = itemDate["config"]["IP"].ToString();//get ip;
+      string  ip = itemDate["config"]["IP"].ToString();
+
+        //get ip;
+        ValueSheet.sentIP = ip;
     }
 
     bool boolConvert(string s) {
