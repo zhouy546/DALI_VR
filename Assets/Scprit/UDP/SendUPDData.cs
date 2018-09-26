@@ -16,7 +16,7 @@ public class SendUPDData : MonoBehaviour {
     public string udpData_str;
     string _sSend = "";
 
-    //[Tooltip("接受端口号")] public int m_ReceivePort = 29010;//接收的端口号 
+    [Tooltip("接受端口号")] public int m_ReceivePort = 60000;//接收的端口号 
     Socket udpserver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
     public string m_ip;//定义一个IP地址
 
@@ -50,31 +50,36 @@ public class SendUPDData : MonoBehaviour {
             instance = this;
         }
 
-        m_ip = ValueSheet.sentIP;
 
 
+        //m_ip = ValueSheet.sentIP;
+        //m_ReceivePort = ValueSheet.m_TargetPort;
+        //isSetup = true;
+        //     StartCoroutine(Sent());
     }
 
     // Update is called once per frame
     void Update()
     {
 
+            udpData_str = CreateMessage();
 
-       udpData_str = CreateMessage();
-       
-       _sSend = udpData_str;
+            _sSend = udpData_str;
 
-        udp_Send(_sSend, m_ip, ValueSheet.m_TargetPort);
-       //StartCoroutine(Sent());
-    }
+            udp_Send(_sSend, m_ip, m_ReceivePort);
 
-    IEnumerator Sent() {
-
-        udp_Send(_sSend, m_ip, ValueSheet.m_TargetPort);
-
-        yield return new WaitForSeconds(25 / 1000);
 
     }
+
+    //IEnumerator Sent() {
+
+    //    udp_Send(_sSend, m_ip, ValueSheet.m_TargetPort);
+
+    //    yield return new WaitForSeconds(25 / 1000);
+
+    //    StartCoroutine(Sent());
+
+    //}
 
 
     string CreateMessage() {
