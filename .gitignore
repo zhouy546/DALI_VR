@@ -3,6 +3,7 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+Assets/StreamingAssets/
 Assets/StreamingAssets/Video/
 Assets/StreamingAssets/Seq/
 Assets/StreamingAssets/AVProVideoSamples/
