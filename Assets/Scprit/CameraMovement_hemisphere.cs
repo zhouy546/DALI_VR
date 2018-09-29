@@ -54,10 +54,32 @@ public class CameraMovement_hemisphere : MonoBehaviour {
             {
                 CameraRot();
             }
+            else
+            {
+
+                CameraBackToDefault();
+            }
         }
+    }
 
 
+    void CameraBackToDefault() {
 
+        float cameraZ = ValueSheet.CamRotation.z;
+
+        float cameraX = ValueSheet.CamRotation.x;
+
+        float cameraY = ValueSheet.CamRotation.y;
+
+        cameraZ = cameraZ + (ValueSheet.DefaultCameraRot.z - cameraZ) * ValueSheet.EaseingValue;
+
+        cameraX = cameraX + (ValueSheet.DefaultCameraRot.x - cameraX) * ValueSheet.EaseingValue;
+
+        cameraY = cameraY + (ValueSheet.DefaultCameraRot.y - cameraY) * ValueSheet.EaseingValue;
+ 
+        ValueSheet.CamRotation=new Vector3(cameraX,cameraY,cameraZ);
+
+        //Debug.Log(ValueSheet.CamRotation);
     }
 
     void CameraRot() {
@@ -142,9 +164,6 @@ public class CameraMovement_hemisphere : MonoBehaviour {
         tempzAxis = zAxis;
 
         tempxAxis = xAxis;
-
-
-
     }
 
 

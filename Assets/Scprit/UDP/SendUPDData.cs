@@ -86,7 +86,7 @@ public class SendUPDData : MonoBehaviour {
         string splitChar = "%";
 
         string x = UtilityFunction.Mapping(ValueSheet.CamRotation.x,ValueSheet.Cam_X_RotMinium, ValueSheet.Cam_X_RotMaxium, -1, 1).ToString("0.000");
-
+        
         string y = UtilityFunction.Mapping(ValueSheet.CamRotation.y, ValueSheet.Cam_Y_RotMinium, ValueSheet.Cam_Y_RotMaxium, -1, 1).ToString("0.000");
 
         string z = UtilityFunction.Mapping(ValueSheet.CamRotation.z, ValueSheet.Cam_Z_RotMinium, ValueSheet.Cam_Z_RotMaxium, -1, 1).ToString("0.000");

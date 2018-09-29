@@ -11,7 +11,7 @@
             
             "SplitChar":" ",
             
-            "CamEaseingValue":"0.005",
+            "CamEaseingValue":"0.01",
             
             "DefaultCameraRot":[
                 "15",
